@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout - RefurbTech</title>
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet"
+        href="checkout-style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="checkout-page">
+
+
+    <!-- HEADER -->
+
+    <header class="checkout-header">
+
+        <button class="back-btn"
+            onclick="goBack()">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </button>
+
+
+        <div class="header-title">
+
+            <span>REFURBTECH</span>
+
+            <h1>CHECKOUT</h1>
+
+        </div>
+
+
+        <div class="secure-icon">
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+        </div>
+
+    </header>
+
+
+
+    <main class="checkout-content">
+
+
+        <!-- CUSTOMER DETAILS -->
+
+        <section class="checkout-section">
+
+            <div class="section-heading">
+
+                <span>CUSTOMER</span>
+
+                <h2>Customer Details</h2>
+
+            </div>
+
+
+            <div class="form-card">
+
+
+                <!-- NAME -->
+
+                <div class="input-group">
+
+                    <label>
+
+                        <i class="fa-solid fa-user"></i>
+
+                        Full Name
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="customerName"
+                        placeholder="Enter your full name">
+
+                </div>
+
+
+
+                <!-- MOBILE -->
+
+                <div class="input-group">
+
+                    <label>
+
+                        <i class="fa-solid fa-phone"></i>
+
+                        Mobile Number
+
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="customerPhone"
+                        placeholder="Enter mobile number"
+                        maxlength="10">
+
+                </div>
+
+
+
+                <!-- EMAIL -->
+
+                <div class="input-group">
+
+                    <label>
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        Email Address
+
+                    </label>
+
+                    <input
+                        type="email"
+                        id="customerEmail"
+                        placeholder="Enter email address">
+
+                </div>
+
+
+
+                <!-- ADDRESS -->
+
+                <div class="input-group">
+
+                    <label>
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        Delivery Address
+
+                    </label>
+
+                    <textarea
+                        id="customerAddress"
+                        rows="3"
+                        placeholder="Enter your complete address"></textarea>
+
+                </div>
+
+
+
+                <!-- CITY + PINCODE -->
+
+                <div class="two-column">
+
+
+                    <div class="input-group">
+
+                        <label>
+
+                            <i class="fa-solid fa-city"></i>
+
+                            City
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="customerCity"
+                            placeholder="City">
+
+                    </div>
+
+
+
+                    <div class="input-group">
+
+                        <label>
+
+                            <i class="fa-solid fa-map-pin"></i>
+
+                            Pincode
+
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="customerPincode"
+                            placeholder="Pincode"
+                            maxlength="6">
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ORDER SUMMARY -->
+
+        <section class="checkout-section">
+
+            <div class="section-heading">
+
+                <span>YOUR ORDER</span>
+
+                <h2>Order Summary</h2>
+
+            </div>
+
+
+            <div class="order-card">
+
+                <div id="orderItems"></div>
+
+
+                <div class="order-divider"></div>
+
+
+                <div class="summary-row">
+
+                    <span>Subtotal</span>
+
+                    <strong id="subtotal">
+                        ₹0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>Discount</span>
+
+                    <strong
+                        class="discount"
+                        id="discount">
+
+                        - ₹0
+
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>Delivery</span>
+
+                    <strong
+                        class="free">
+
+                        FREE
+
+                    </strong>
+
+                </div>
+
+
+                <div class="order-divider"></div>
+
+
+                <div class="total-row">
+
+                    <span>Total Amount</span>
+
+                    <strong id="totalAmount">
+                        ₹0
+                    </strong>
+
+                </div>
+
+
+                <div class="secure-message">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    <span>
+                        Your order is securely processed
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- CHECKOUT BUTTON -->
+
+        <section class="checkout-action">
+
+
+            <button
+                class="checkout-btn"
+                onclick="placeOrder()">
+
+                <span>
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    Sent Enquire
+
+                </span>
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </button>
+
+
+            <button
+                class="back-cart-btn"
+                onclick="goToCart()">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                Back to Cart
+
+            </button>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- EMPTY CART -->
+
+    <section
+        class="empty-checkout"
+        id="emptyCheckout"
+        style="display:none;">
+
+        <div class="empty-icon">
+
+            <i class="fa-solid fa-cart-shopping"></i>
+
+        </div>
+
+
+        <h2>Your Cart is Empty</h2>
+
+
+        <p>
+            Please add products to your cart
+            before checkout.
+        </p>
+
+
+        <button
+            onclick="goToShop()"
+            class="shop-btn">
+
+            <i class="fa-solid fa-bag-shopping"></i>
+
+            Start Shopping
+
+        </button>
+
+    </section>
+
+
+</div>
+
+
+
+<script>
+
+
+/* ================================
+   GET CART
+================================ */
+
+function getCart() {
+
+    return JSON.parse(
+        localStorage.getItem("cart")
+    ) || [];
+
+}
+
+
+
+/* ================================
+   LOAD CHECKOUT
+================================ */
+
+function loadCheckout() {
+
+
+    const cart = getCart();
+
+    const orderItems =
+        document.getElementById("orderItems");
+
+    const emptyCheckout =
+        document.getElementById("emptyCheckout");
+
+    const mainContent =
+        document.querySelector(".checkout-content");
+
+
+    if (!cart.length) {
+
+        mainContent.style.display = "none";
+
+        emptyCheckout.style.display = "flex";
+
+        return;
+
+    }
+
+
+    let subtotal = 0;
+
+    let discount = 0;
+
+
+    orderItems.innerHTML = "";
+
+
+    cart.forEach(item => {
+
+
+        const price =
+            Number(item.price) || 0;
+
+
+        const oldPrice =
+            Number(item.oldPrice) || price;
+
+
+        const quantity =
+            Number(item.quantity) || 1;
+
+
+        const itemTotal =
+            price * quantity;
+
+
+        const itemDiscount =
+            (oldPrice - price) * quantity;
+
+
+        subtotal += itemTotal;
+
+        discount += itemDiscount;
+
+
+        orderItems.innerHTML += `
+
+            <div class="order-item">
+
+                <div class="order-product-icon">
+
+                    <i class="fa-solid fa-laptop"></i>
+
+                </div>
+
+
+                <div class="order-product-info">
+
+                    <h3>
+                        ${item.name}
+                    </h3>
+
+                    <span>
+                        Qty: ${quantity}
+                    </span>
+
+                </div>
+
+
+                <strong>
+                    ₹${itemTotal.toLocaleString("en-IN")}
+                </strong>
+
+            </div>
+
+        `;
+
+    });
+
+
+    const total =
+        subtotal;
+
+
+    document.getElementById("subtotal")
+        .textContent =
+        "₹" + subtotal.toLocaleString("en-IN");
+
+
+    document.getElementById("discount")
+        .textContent =
+        "- ₹" + discount.toLocaleString("en-IN");
+
+
+    document.getElementById("totalAmount")
+        .textContent =
+        "₹" + total.toLocaleString("en-IN");
+
+}
+
+
+
+/* ================================
+   PLACE ORDER
+================================ */
+
+function placeOrder() {
+
+
+    const name =
+        document.getElementById("customerName")
+            .value.trim();
+
+
+    const phone =
+        document.getElementById("customerPhone")
+            .value.trim();
+
+
+    const email =
+        document.getElementById("customerEmail")
+            .value.trim();
+
+
+    const address =
+        document.getElementById("customerAddress")
+            .value.trim();
+
+
+    const city =
+        document.getElementById("customerCity")
+            .value.trim();
+
+
+    const pincode =
+        document.getElementById("customerPincode")
+            .value.trim();
+
+
+
+    /* VALIDATION */
+
+    if (!name) {
+
+        alert("Please enter your full name.");
+
+        return;
+
+    }
+
+
+    if (!/^[0-9]{10}$/.test(phone)) {
+
+        alert("Please enter a valid 10-digit mobile number.");
+
+        return;
+
+    }
+
+
+    if (
+        !email ||
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    ) {
+
+        alert("Please enter a valid email address.");
+
+        return;
+
+    }
+
+
+    if (!address) {
+
+        alert("Please enter your delivery address.");
+
+        return;
+
+    }
+
+
+    if (!city) {
+
+        alert("Please enter your city.");
+
+        return;
+
+    }
+
+
+    if (!/^[0-9]{6}$/.test(pincode)) {
+
+        alert("Please enter a valid 6-digit pincode.");
+
+        return;
+
+    }
+
+
+
+    const cart = getCart();
+
+
+    if (!cart.length) {
+
+        alert("Your cart is empty.");
+
+        return;
+
+    }
+
+
+
+    /*
+       TEMPORARY ORDER DATA
+
+       Later this same object
+       will be sent to Node.js backend.
+    */
+
+    const orderData = {
+
+        customer: {
+
+            name: name,
+
+            phone: phone,
+
+            email: email,
+
+            address: address,
+
+            city: city,
+
+            pincode: pincode
+
+        },
+
+        products: cart,
+
+        total:
+            cart.reduce(
+                (sum, item) =>
+                    sum +
+                    (
+                        Number(item.price) || 0
+                    ) *
+                    (
+                        Number(item.quantity) || 1
+                    ),
+                0
+            ),
+
+        orderDate:
+            new Date().toISOString()
+
+    };
+
+
+    /*
+       TEMPORARILY SAVE ORDER
+
+       Later backend will handle this.
+    */
+
+    localStorage.setItem(
+        "latestOrder",
+        JSON.stringify(orderData)
+    );
+
+
+    alert(
+        "Customer details validated successfully."
+    );
+
+
+    /*
+       NEXT STEP:
+       Backend + Email
+    */
+
+}
+
+
+
+/* ================================
+   NAVIGATION
+================================ */
+
+function goBack() {
+
+    window.history.back();
+
+}
+
+
+function goToCart() {
+
+    window.location.href =
+        "cart.html";
+
+}
+
+
+function goToShop() {
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+
+/* ================================
+   START
+================================ */
+
+loadCheckout();
+
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Product Details - RefurbTech</title>
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="liststyle.css">
+
+</head>
+
+
+<body>
+
+
+<div class="product-page">
+
+
+    <!-- ================= TOP BAR ================= -->
+
+    <header class="details-header">
+
+        <button
+            class="back-btn"
+            onclick="goBack()">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </button>
+
+
+        <div class="header-title">
+
+            <span>PRODUCT DETAILS</span>
+
+        </div>
+
+
+        <button class="cart-btn" onclick="openCart()">
+
+            <i class="fa-solid fa-cart-shopping"></i>
+
+            <b id="cartCount">0</b>
+
+        </button>
+
+    </header>
+
+
+
+    <!-- ================= PRODUCT IMAGE ================= -->
+
+    <section class="product-image-section">
+
+        <div class="image-badge">
+            REFURBISHED
+        </div>
+
+
+        <button class="image-heart">
+
+            <i class="fa-regular fa-heart"></i>
+
+        </button>
+
+
+        <div class="main-product-image">
+
+            <i
+                id="productIcon"
+                class="fa-solid fa-laptop">
+            </i>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= PRODUCT INFORMATION ================= -->
+
+    <section class="product-content">
+
+
+        <span
+            id="productCategory"
+            class="product-category">
+            LAPTOP
+        </span>
+
+
+        <h1 id="productName">
+            Dell Latitude 7420
+        </h1>
+
+
+        <div class="rating-row">
+
+            <div class="rating">
+
+                <span>⭐ 4.8</span>
+
+                <small>
+                    24 Reviews
+                </small>
+
+            </div>
+
+
+            <span class="verified">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                Tested
+
+            </span>
+
+        </div>
+
+
+
+        <!-- ================= HIGHLIGHTS ================= -->
+
+        <div class="highlights">
+
+
+            <div class="highlight">
+
+                <i class="fa-solid fa-microchip"></i>
+
+                <div>
+
+                    <span>Processor</span>
+
+                    <strong id="processor">
+                        Intel Core i7-1185G7
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="highlight">
+
+                <i class="fa-solid fa-memory"></i>
+
+                <div>
+
+                    <span>RAM</span>
+
+                    <strong id="ram">
+                        16 GB DDR4
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="highlight">
+
+                <i class="fa-solid fa-hard-drive"></i>
+
+                <div>
+
+                    <span>Storage</span>
+
+                    <strong id="storage">
+                        512 GB NVMe SSD
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="highlight">
+
+                <i class="fa-solid fa-display"></i>
+
+                <div>
+
+                    <span>Display</span>
+
+                    <strong id="display">
+                        14" Full HD
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================= SPECIFICATIONS ================= -->
+
+        <section class="spec-section">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span>
+                        PRODUCT INFORMATION
+                    </span>
+
+                    <h2>
+                        Full Specifications
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="spec-card">
+
+
+                <div class="spec-row">
+
+                    <div class="spec-label">
+
+                        <i class="fa-solid fa-microchip"></i>
+
+                        Processor
+
+                    </div>
+
+                    <strong id="specProcessor">
+                        Intel Core i7-1185G7
+                    </strong>
+
+                </div>
+
+
+
+                <div class="spec-row">
+
+                    <div class="spec-label">
+
+                        <i class="fa-solid fa-memory"></i>
+
+                        RAM
+
+                    </div>
+
+                    <strong id="specRam">
+                        16 GB DDR4
+                    </strong>
+
+                </div>
+
+
+
+                <div class="spec-row">
+
+                    <div class="spec-label">
+
+                        <i class="fa-solid fa-hard-drive"></i>
+
+                        SSD
+
+                    </div>
+
+                    <strong id="specStorage">
+                        512 GB NVMe SSD
+                    </strong>
+
+                </div>
+
+
+
+                <div class="spec-row">
+
+                    <div class="spec-label">
+
+                        <i class="fa-solid fa-battery-three-quarters"></i>
+
+                        Battery Health
+
+                    </div>
+
+                    <strong id="batteryHealth">
+                        92%
+                    </strong>
+
+                </div>
+
+
+
+                <div class="spec-row">
+
+                    <div class="spec-label">
+
+                        <i class="fa-solid fa-star"></i>
+
+                        Condition
+
+                    </div>
+
+                    <strong id="condition">
+                        Excellent
+                    </strong>
+
+                </div>
+
+
+
+                <div class="spec-row">
+
+                    <div class="spec-label">
+
+                        <i class="fa-solid fa-display"></i>
+
+                        Display
+
+                    </div>
+
+                    <strong id="specDisplay">
+                        14" Full HD IPS
+                    </strong>
+
+                </div>
+
+
+
+                <div class="spec-row">
+
+                    <div class="spec-label">
+
+                        <i class="fa-solid fa-gamepad"></i>
+
+                        Graphics
+
+                    </div>
+
+                    <strong id="graphics">
+                        Intel Iris Xe
+                    </strong>
+
+                </div>
+
+
+
+                <div class="spec-row">
+
+                    <div class="spec-label">
+
+                        <i class="fa-solid fa-plug"></i>
+
+                        Ports
+
+                    </div>
+
+                    <strong id="ports">
+                        USB-A, USB-C, HDMI, Audio
+                    </strong>
+
+                </div>
+
+
+
+                <div class="spec-row">
+
+                    <div class="spec-label">
+
+                        <i class="fa-solid fa-fingerprint"></i>
+
+                        Sensors
+
+                    </div>
+
+                    <strong id="sensors">
+                        Fingerprint, Camera, Light Sensor
+                    </strong>
+
+                </div>
+
+
+
+                <div class="spec-row">
+
+                    <div class="spec-label">
+
+                        <i class="fa-brands fa-windows"></i>
+
+                        Operating System
+
+                    </div>
+
+                    <strong id="os">
+                        Windows 11 Pro
+                    </strong>
+
+                </div>
+
+
+
+                <div class="spec-row">
+
+                    <div class="spec-label">
+
+                        <i class="fa-solid fa-clock"></i>
+
+                        Battery Backup
+
+                    </div>
+
+                    <strong id="backup">
+                        4 - 5 Hours
+                    </strong>
+
+                </div>
+
+
+
+                <div class="spec-row">
+
+                    <div class="spec-label">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        Warranty
+
+                    </div>
+
+                    <strong id="warranty">
+                        6 Months
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= CONDITION ================= -->
+
+        <section class="condition-card">
+
+            <div class="condition-icon">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    Quality Checked
+                </strong>
+
+                <p>
+                    This product has been fully tested
+                    and verified before sale.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= AVAILABILITY ================= -->
+
+        <section class="purchase-section">
+
+
+            <div class="availability-row">
+
+                <span>
+                    Available Quantity
+                </span>
+
+                <strong id="availableQuantity">
+                    5 Units
+                </strong>
+
+            </div>
+
+
+
+            <!-- QUANTITY -->
+
+            <div class="purchase-row">
+
+
+                <span class="quantity-title">
+                    Quantity
+                </span>
+
+
+                <div class="quantity-control">
+
+
+                    <button
+                        id="minusBtn">
+
+                        −
+
+                    </button>
+
+
+                    <span id="quantity">
+                        1
+                    </span>
+
+
+                    <button
+                        id="plusBtn">
+
+                        +
+
+                    </button>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= PRICE ================= -->
+
+            <div class="price-section">
+
+                <span>
+                    Total Price
+                </span>
+
+
+                <div>
+
+                    <strong id="price">
+                        ₹34,000
+                    </strong>
+
+                    <del id="oldPrice">
+                        ₹52,000
+                    </del>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= ADD CART ================= -->
+
+            <button
+                id="addCartBtn"
+                class="main-add-cart">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                Add to Cart
+
+            </button>
+
+
+            <!-- BACK -->
+
+            <button
+                class="back-products"
+                onclick="goBack()">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Products
+
+            </button>
+
+
+        </section>
+
+
+    </section>
+
+
+</div>
+
+
+
+<script>
+
+
+/* ============================================
+   PRODUCT DATA
+============================================ */
+
+const products = {
+
+    "dell-latitude-7420": {
+
+        name: "Dell Latitude 7420",
+
+        category: "LAPTOP",
+
+        icon: "fa-laptop",
+
+        price: 34000,
+
+        oldPrice: 52000,
+
+        available: 5,
+
+        processor: "Intel Core i7-1185G7",
+
+        ram: "16 GB DDR4",
+
+        storage: "512 GB NVMe SSD",
+
+        batteryHealth: "92%",
+
+        condition: "Excellent",
+
+        display: '14" Full HD IPS',
+
+        graphics: "Intel Iris Xe",
+
+        ports: "USB-A, USB-C, HDMI, Audio",
+
+        sensors: "Fingerprint, Camera, Light Sensor",
+
+        os: "Windows 11 Pro",
+
+        backup: "4 - 5 Hours",
+
+        warranty: "6 Months"
+
+    },
+
+
+    "hp-elitebook-840-g7": {
+
+        name: "HP EliteBook 840 G7",
+
+        category: "LAPTOP",
+
+        icon: "fa-laptop",
+
+        price: 28500,
+
+        oldPrice: 45000,
+
+        available: 4,
+
+        processor: "Intel Core i5-10310U",
+
+        ram: "16 GB DDR4",
+
+        storage: "512 GB NVMe SSD",
+
+        batteryHealth: "89%",
+
+        condition: "Excellent",
+
+        display: '14" Full HD',
+
+        graphics: "Intel UHD Graphics",
+
+        ports: "USB-A, USB-C, HDMI, Audio",
+
+        sensors: "Fingerprint, Camera",
+
+        os: "Windows 11 Pro",
+
+        backup: "4 Hours",
+
+        warranty: "6 Months"
+
+    },
+
+
+    "dell-optiplex-7080": {
+
+        name: "Dell OptiPlex 7080",
+
+        category: "DESKTOP",
+
+        icon: "fa-desktop",
+
+        price: 25000,
+
+        oldPrice: 39000,
+
+        available: 8,
+
+        processor: "Intel Core i7-10700",
+
+        ram: "16 GB DDR4",
+
+        storage: "512 GB NVMe SSD",
+
+        batteryHealth: "N/A",
+
+        condition: "Excellent",
+
+        display: "No Display",
+
+        graphics: "Intel UHD Graphics 630",
+
+        ports: "USB-A, USB-C, HDMI, DisplayPort",
+
+        sensors: "N/A",
+
+        os: "Windows 11 Pro",
+
+        backup: "N/A",
+
+        warranty: "6 Months"
+
+    },
+
+
+    "wireless-keyboard": {
+
+        name: "Wireless Keyboard",
+
+        category: "ACCESSORY",
+
+        icon: "fa-keyboard",
+
+        price: 899,
+
+        oldPrice: 1499,
+
+        available: 15,
+
+        processor: "N/A",
+
+        ram: "N/A",
+
+        storage: "N/A",
+
+        batteryHealth: "Good",
+
+        condition: "New",
+
+        display: "N/A",
+
+        graphics: "N/A",
+
+        ports: "USB Receiver",
+
+        sensors: "Key Sensors",
+
+        os: "N/A",
+
+        backup: "Up to 3 Months",
+
+        warranty: "1 Year"
+
+    },
+
+
+    "lenovo-thinkpad-t14": {
+
+        name: "Lenovo ThinkPad T14",
+
+        category: "LAPTOP",
+
+        icon: "fa-laptop",
+
+        price: 29999,
+
+        oldPrice: 44000,
+
+        available: 3,
+
+        processor: "Intel Core i5-10310U",
+
+        ram: "16 GB DDR4",
+
+        storage: "512 GB NVMe SSD",
+
+        batteryHealth: "91%",
+
+        condition: "Excellent",
+
+        display: '14" Full HD IPS',
+
+        graphics: "Intel UHD Graphics",
+
+        ports: "USB-A, USB-C, HDMI, Audio",
+
+        sensors: "Fingerprint, Camera",
+
+        os: "Windows 11 Pro",
+
+        backup: "4 - 5 Hours",
+
+        warranty: "6 Months"
+
+    },
+
+
+    "hp-prodesk-600-g5": {
+
+        name: "HP ProDesk 600 G5",
+
+        category: "DESKTOP",
+
+        icon: "fa-desktop",
+
+        price: 21999,
+
+        oldPrice: 35000,
+
+        available: 6,
+
+        processor: "Intel Core i5-9500",
+
+        ram: "16 GB DDR4",
+
+        storage: "256 GB SSD",
+
+        batteryHealth: "N/A",
+
+        condition: "Very Good",
+
+        display: "No Display",
+
+        graphics: "Intel UHD Graphics 630",
+
+        ports: "USB-A, DisplayPort, Audio",
+
+        sensors: "N/A",
+
+        os: "Windows 11 Pro",
+
+        backup: "N/A",
+
+        warranty: "6 Months"
+
+    }
+
+};
+
+
+
+/* ============================================
+   GET PRODUCT ID
+============================================ */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const productId =
+    params.get("id") ||
+    "dell-latitude-7420";
+
+
+const product =
+    products[productId];
+
+
+
+/* ============================================
+   LOAD PRODUCT
+============================================ */
+
+if (product) {
+
+    document.getElementById("productCategory")
+        .textContent =
+        product.category;
+
+
+    document.getElementById("productName")
+        .textContent =
+        product.name;
+
+
+    document.getElementById("processor")
+        .textContent =
+        product.processor;
+
+
+    document.getElementById("ram")
+        .textContent =
+        product.ram;
+
+
+    document.getElementById("storage")
+        .textContent =
+        product.storage;
+
+
+    document.getElementById("display")
+        .textContent =
+        product.display;
+
+
+    document.getElementById("specProcessor")
+        .textContent =
+        product.processor;
+
+
+    document.getElementById("specRam")
+        .textContent =
+        product.ram;
+
+
+    document.getElementById("specStorage")
+        .textContent =
+        product.storage;
+
+
+    document.getElementById("batteryHealth")
+        .textContent =
+        product.batteryHealth;
+
+
+    document.getElementById("condition")
+        .textContent =
+        product.condition;
+
+
+    document.getElementById("specDisplay")
+        .textContent =
+        product.display;
+
+
+    document.getElementById("graphics")
+        .textContent =
+        product.graphics;
+
+
+    document.getElementById("ports")
+        .textContent =
+        product.ports;
+
+
+    document.getElementById("sensors")
+        .textContent =
+        product.sensors;
+
+
+    document.getElementById("os")
+        .textContent =
+        product.os;
+
+
+    document.getElementById("backup")
+        .textContent =
+        product.backup;
+
+
+    document.getElementById("warranty")
+        .textContent =
+        product.warranty;
+
+
+    document.getElementById("availableQuantity")
+        .textContent =
+        product.available + " Units";
+
+
+    document.getElementById("price")
+        .textContent =
+        "₹" +
+        product.price.toLocaleString("en-IN");
+
+
+    document.getElementById("oldPrice")
+        .textContent =
+        "₹" +
+        product.oldPrice.toLocaleString("en-IN");
+
+
+    const icon =
+        document.getElementById("productIcon");
+
+    icon.className =
+        "fa-solid " +
+        product.icon;
+
+}
+
+
+
+/* ============================================
+   QUANTITY
+============================================ */
+
+let quantity = 1;
+
+
+const quantityElement =
+    document.getElementById("quantity");
+
+
+document.getElementById("plusBtn")
+    .addEventListener("click", () => {
+
+        if (quantity < product.available) {
+
+            quantity++;
+
+            quantityElement.textContent =
+                quantity;
+
+            updatePrice();
+
+        }
+
+    });
+
+
+document.getElementById("minusBtn")
+    .addEventListener("click", () => {
+
+        if (quantity > 1) {
+
+            quantity--;
+
+            quantityElement.textContent =
+                quantity;
+
+            updatePrice();
+
+        }
+
+    });
+
+
+
+/* ============================================
+   TOTAL PRICE
+============================================ */
+
+function updatePrice() {
+
+    const total =
+        product.price * quantity;
+
+
+    document.getElementById("price")
+        .textContent =
+        "₹" +
+        total.toLocaleString("en-IN");
+
+}
+
+
+
+/* ============================================
+   ADD TO CART
+============================================ */
+
+document.getElementById("addCartBtn")
+    .addEventListener("click", () => {
+
+
+        let cart =
+            JSON.parse(
+                localStorage.getItem("cart")
+            ) || [];
+
+
+        const existing =
+            cart.find(
+                item =>
+                    item.id === productId
+            );
+
+
+        if (existing) {
+
+            existing.quantity += quantity;
+
+        } else {
+
+            cart.push({
+
+                id: productId,
+
+                name: product.name,
+
+                price: product.price,
+
+                quantity: quantity
+
+            });
+
+        }
+
+
+        localStorage.setItem(
+            "cart",
+            JSON.stringify(cart)
+        );
+
+
+        updateCartCount();
+
+
+        const button =
+            document.getElementById(
+                "addCartBtn"
+            );
+
+
+        button.innerHTML =
+            '<i class="fa-solid fa-check"></i> Added to Cart';
+
+
+        setTimeout(() => {
+
+            button.innerHTML =
+                '<i class="fa-solid fa-cart-shopping"></i> Add to Cart';
+
+        }, 1300);
+
+    });
+
+
+
+/* ============================================
+   CART COUNT
+============================================ */
+
+function updateCartCount() {
+
+    const cart =
+        JSON.parse(
+            localStorage.getItem("cart")
+        ) || [];
+
+
+    const total =
+        cart.reduce(
+            (sum, item) =>
+                sum + item.quantity,
+            0
+        );
+
+
+    document.getElementById("cartCount")
+        .textContent =
+        total;
+
+}
+
+
+updateCartCount();
+
+
+
+/* ============================================
+   BACK
+============================================ */
+
+function goBack() {
+
+    window.history.back();
+
+}
+
+
+
+/* ============================================
+   CART
+============================================ */
+
+function openCart() {
+
+    /*
+       Next step:
+       cart.html
+    */
+
+    window.location.href =
+        "cart.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>
