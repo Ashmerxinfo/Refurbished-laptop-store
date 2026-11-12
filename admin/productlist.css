@@ -1,0 +1,446 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f6fa;
+    color: #252b3a;
+}
+
+.page-container {
+    width: 100%;
+    max-width: 430px;
+    margin: auto;
+    padding: 13px 11px;
+}
+
+/* HEADER */
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.page-header h2 {
+    font-size: 17px;
+    margin-bottom: 4px;
+}
+
+.page-header p {
+    font-size: 10px;
+    color: #9298a5;
+}
+
+.back-btn {
+    text-decoration: none;
+    background: #fff;
+    border: 1px solid #e7e9ef;
+    color: #333b4e;
+    padding: 7px 10px;
+    border-radius: 7px;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+/* SUMMARY */
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+    margin-bottom: 17px;
+}
+
+.summary-card {
+    background: #fff;
+    border: 1px solid #eceef3;
+    border-radius: 10px;
+    padding: 12px 10px;
+}
+
+.summary-card span {
+    font-size: 10px;
+    color: #858b99;
+}
+
+.summary-card h2 {
+    font-size: 18px;
+    margin: 8px 0 4px;
+}
+
+.summary-card small {
+    font-size: 9px;
+    color: #a0a5b1;
+}
+
+/* LIST SECTION */
+
+.list-section {
+    background: #fff;
+    border: 1px solid #eceef3;
+    border-radius: 11px;
+    padding: 12px 10px;
+}
+
+.list-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.list-heading h3 {
+    font-size: 14px;
+    margin-bottom: 3px;
+}
+
+.list-heading p {
+    font-size: 10px;
+    color: #9298a5;
+}
+
+.product-count {
+    background: #f0efff;
+    color: #6658d3;
+    padding: 5px 8px;
+    border-radius: 6px;
+    font-size: 9px;
+    font-weight: 600;
+}
+
+/* SEARCH */
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fafbfc;
+    border: 1px solid #e7e9ef;
+    border-radius: 7px;
+    padding: 0 10px;
+    height: 36px;
+    margin-bottom: 9px;
+}
+
+.search-box i {
+    font-size: 11px;
+    color: #9ba1ad;
+}
+
+.search-box input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 11px;
+}
+
+/* FILTER */
+
+.filter-row {
+    display: flex;
+    gap: 7px;
+    margin-bottom: 13px;
+}
+
+.filter-row select {
+    flex: 1;
+    min-width: 0;
+    padding: 8px 6px;
+    border: 1px solid #e7e9ef;
+    border-radius: 7px;
+    background: #fff;
+    font-size: 10px;
+    outline: none;
+}
+
+/* PRODUCT LIST */
+
+.product-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* PRODUCT CARD */
+
+.product-card {
+    border: 1px solid #eceef3;
+    border-radius: 8px;
+    padding: 11px 10px;
+    background: #fff;
+}
+
+.product-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 7px;
+    margin-bottom: 10px;
+}
+
+.product-name {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.product-id {
+    font-size: 9px;
+    color: #999fad;
+}
+
+.category-tag {
+    background: #f1f2f6;
+    color: #626a7b;
+    border-radius: 5px;
+    padding: 5px 7px;
+    font-size: 8px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* DETAILS */
+
+.product-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    padding-top: 9px;
+    border-top: 1px solid #f0f1f4;
+}
+
+.detail-item span {
+    display: block;
+    font-size: 9px;
+    color: #999fad;
+    margin-bottom: 5px;
+}
+
+.detail-item strong {
+    font-size: 11px;
+    color: #303748;
+}
+
+.detail-item.total strong {
+    color: #6658d3;
+}
+
+/* EMPTY / LOADING */
+
+.loading,
+.empty-state {
+    text-align: center;
+    padding: 25px 10px;
+    color: #9298a5;
+    font-size: 11px;
+}
+
+
+
+/* ==================================
+   FIXED HEADER
+================================== */
+
+.page-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #f5f6fa;
+    padding: 12px 0;
+    margin-top: -13px;
+}
+
+
+/* ==================================
+   PRODUCT CARD LIGHT BACKGROUND
+================================== */
+
+.product-card {
+    background: #f7f6ff;
+    border: 1px solid #e7e3fa;
+    border-radius: 11px;
+    padding: 14px 12px;
+    margin-bottom: 2px;
+    transition: 0.2s ease;
+}
+
+.product-card:hover {
+    background: #f0edff;
+    border-color: #d8d0fa;
+}
+
+
+/* PRODUCT NAME */
+
+.product-name {
+    color: #37315c;
+    font-weight: 700;
+}
+
+
+/* PRODUCT ID */
+
+.product-id {
+    color: #85809f;
+}
+
+
+/* PRODUCT DETAILS DIVIDER */
+
+.product-details {
+    border-top: 1px solid #e8e4f5;
+}
+
+
+/* PRODUCT PRICE */
+
+.detail-item strong {
+    color: #45405f;
+}
+
+.detail-item.total strong {
+    color: #6658d3;
+}
+
+
+/* CATEGORY TAG */
+
+.category-tag {
+    background: #eae6fb;
+    color: #6254ad;
+}
+
+
+
+/* SMALL PHONES */
+
+@media (max-width: 360px) {
+    .product-name {
+        font-size: 11px;
+    }
+
+    .detail-item strong {
+        font-size: 10px;
+    }
+
+    .summary-card h2 {
+        font-size: 16px;
+    }
+}
+/* MEDIUM MOBILE SIZE */
+
+.page-container {
+    max-width: 480px;
+    padding: 16px 14px;
+}
+
+.page-header h2 {
+    font-size: 20px;
+}
+
+.page-header p {
+    font-size: 12px;
+}
+
+.back-btn {
+    padding: 9px 12px;
+    font-size: 12px;
+}
+
+.summary-grid {
+    gap: 11px;
+    margin-bottom: 20px;
+}
+
+.summary-card {
+    padding: 15px 13px;
+}
+
+.summary-card span {
+    font-size: 12px;
+}
+
+.summary-card h2 {
+    font-size: 21px;
+}
+
+.summary-card small {
+    font-size: 10px;
+}
+
+.list-section {
+    padding: 15px 13px;
+}
+
+.list-heading h3 {
+    font-size: 16px;
+}
+
+.list-heading p {
+    font-size: 11px;
+}
+
+.product-count {
+    font-size: 10px;
+    padding: 6px 9px;
+}
+
+.search-box {
+    height: 40px;
+}
+
+.search-box input {
+    font-size: 12px;
+}
+
+.filter-row select {
+    padding: 10px 8px;
+    font-size: 11px;
+}
+
+.product-list {
+    gap: 10px;
+}
+
+.product-card {
+    padding: 13px 12px;
+}
+
+.product-name {
+    font-size: 14px;
+}
+
+.product-id {
+    font-size: 10px;
+}
+
+.category-tag {
+    font-size: 9px;
+    padding: 6px 8px;
+}
+
+.product-details {
+    gap: 7px;
+    padding-top: 11px;
+}
+
+.detail-item span {
+    font-size: 10px;
+}
+
+.detail-item strong {
+    font-size: 12px;
+}
+
+.loading,
+.empty-state {
+    font-size: 12px;
+}
+
+

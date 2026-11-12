@@ -892,6 +892,59 @@ app.get("/api/products", async (req, res) => {
 });
 
 
+// ==================================
+// ADMIN - GET ALL PRODUCTS API
+// ==================================
+
+app.get("/api/admin/products", async (req, res) => {
+
+    try {
+
+        // ADMIN AUTHENTICATION
+        if (!req.session.masterAdmin) {
+            return res.status(401).json({
+                success: false,
+                message: "Unauthorized access"
+            });
+        }
+
+        // ALL PRODUCTS - Active and Inactive
+        const products = await Product.find({})
+            .sort({ createdAt: -1 })
+            .lean();
+
+        // TOTAL STOCK VALUE
+        const totalStockValue = products.reduce(
+            (total, product) => {
+                return total +
+                    (product.available * product.price);
+            },
+            0
+        );
+
+        res.json({
+            success: true,
+            count: products.length,
+            totalStockValue,
+            products
+        });
+
+    } catch (error) {
+
+        console.error("Admin Product List Error:", error);
+
+        res.status(500).json({
+            success: false,
+            message: "Unable to fetch products"
+        });
+
+    }
+
+});
+
+
+
+
 
 
 

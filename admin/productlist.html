@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List | RefurbTech Admin</title>
+    <link rel="stylesheet" href="productlist.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <!-- HEADER -->
+    <header class="page-header">
+
+        <div>
+            <h2>Product List</h2>
+            <p>Manage all your products and stock details</p>
+        </div>
+
+        <a href="settings.html" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back
+        </a>
+
+    </header>
+
+
+    <!-- SUMMARY -->
+    <section class="summary-grid">
+
+        <div class="summary-card">
+            <span>Total Products</span>
+            <h2 id="totalProducts">0</h2>
+            <small>All registered products</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Total Stock Value</span>
+            <h2 id="totalStockValue">₹0</h2>
+            <small>Current inventory value</small>
+        </div>
+
+    </section>
+
+
+    <!-- PRODUCT LIST HEADER -->
+    <section class="list-section">
+
+        <div class="list-heading">
+            <div>
+                <h3>All Products</h3>
+                <p>Complete product inventory</p>
+            </div>
+
+            <span class="product-count" id="productCount">
+                0 Products
+            </span>
+        </div>
+
+
+        <!-- SEARCH -->
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search product name, ID or category..."
+            >
+        </div>
+
+
+        <!-- CATEGORY FILTER -->
+        <div class="filter-row">
+
+            <select id="categoryFilter">
+                <option value="ALL">All Categories</option>
+                <option value="LAPTOP">Laptop</option>
+                <option value="DESKTOP">Desktop</option>
+                <option value="ACCESSORY">Accessory</option>
+                <option value="STORAGE">Storage</option>
+                <option value="RAM">RAM</option>
+            </select>
+
+            <select id="sortFilter">
+                <option value="latest">Latest First</option>
+                <option value="low">Price: Low to High</option>
+                <option value="high">Price: High to Low</option>
+                <option value="stock">Stock: High to Low</option>
+            </select>
+
+        </div>
+
+
+        <!-- PRODUCTS -->
+        <div id="productList" class="product-list">
+
+            <div class="loading">
+                Loading products...
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+</body>
+
+<script>
+
+                    const productList = document.getElementById("productList");
+            const totalProducts = document.getElementById("totalProducts");
+            const totalStockValue = document.getElementById("totalStockValue");
+            const productCount = document.getElementById("productCount");
+
+            const searchInput = document.getElementById("searchInput");
+            const categoryFilter = document.getElementById("categoryFilter");
+            const sortFilter = document.getElementById("sortFilter");
+
+            let allProducts = [];
+
+
+            // ==================================
+            // CURRENCY FORMAT
+            // ==================================
+
+            function formatPrice(amount) {
+
+                return new Intl.NumberFormat("en-IN", {
+                    style: "currency",
+                    currency: "INR",
+                    maximumFractionDigits: 0
+                }).format(amount || 0);
+
+            }
+
+
+            // ==================================
+            // FETCH ALL PRODUCTS
+            // ==================================
+
+            async function loadProducts() {
+
+                try {
+
+                    productList.innerHTML = `
+                        <div class="loading">Loading products...</div>
+                    `;
+
+                    const response = await fetch("/api/admin/products");
+
+                    if (response.status === 401) {
+                        window.location.href = "/admin-login.html";
+                        return;
+                    }
+
+                    const result = await response.json();
+
+                    if (!response.ok || !result.success) {
+                        throw new Error(result.message || "Unable to load products");
+                    }
+
+                    allProducts = result.products || [];
+
+                    // SUMMARY
+                    updateSummary();
+
+                    // DISPLAY PRODUCTS
+                    displayProducts();
+
+                } catch (error) {
+
+                    console.error("Product List Error:", error);
+
+                    productList.innerHTML = `
+                        <div class="empty-state">
+                            Unable to load products. Please try again.
+                        </div>
+                    `;
+
+                }
+
+            }
+
+
+            // ==================================
+            // UPDATE SUMMARY
+            // ==================================
+
+            function updateSummary() {
+
+                const count = allProducts.length;
+
+                const stockValue = allProducts.reduce(
+                    (total, product) => {
+                        return total +
+                            (Number(product.available) * Number(product.price));
+                    },
+                    0
+                );
+
+                totalProducts.textContent = count;
+
+                totalStockValue.textContent = formatPrice(stockValue);
+
+            }
+
+
+            // ==================================
+            // FILTER AND SORT PRODUCTS
+            // ==================================
+
+            function getFilteredProducts() {
+
+                let products = [...allProducts];
+
+                const search = searchInput.value.trim().toLowerCase();
+
+                const category = categoryFilter.value;
+
+                const sort = sortFilter.value;
+
+
+                // SEARCH FILTER
+
+                if (search) {
+
+                    products = products.filter(product => {
+
+                        return (
+                            (product.name || "").toLowerCase().includes(search) ||
+                            (product.productId || "").toLowerCase().includes(search) ||
+                            (product.category || "").toLowerCase().includes(search)
+                        );
+
+                    });
+
+                }
+
+
+                // CATEGORY FILTER
+
+                if (category !== "ALL") {
+
+                    products = products.filter(product => {
+                        return product.category === category;
+                    });
+
+                }
+
+
+                // SORT
+
+                if (sort === "latest") {
+
+                    products.sort((a, b) =>
+                        new Date(b.createdAt) - new Date(a.createdAt)
+                    );
+
+                } else if (sort === "low") {
+
+                    products.sort((a, b) => a.price - b.price);
+
+                } else if (sort === "high") {
+
+                    products.sort((a, b) => b.price - a.price);
+
+                } else if (sort === "stock") {
+
+                    products.sort((a, b) => b.available - a.available);
+
+                }
+
+                return products;
+
+            }
+
+
+            // ==================================
+            // DISPLAY PRODUCTS
+            // ==================================
+
+            function displayProducts() {
+
+                const products = getFilteredProducts();
+
+                productCount.textContent = `${products.length} Products`;
+
+                if (products.length === 0) {
+
+                    productList.innerHTML = `
+                        <div class="empty-state">
+                            No products found.
+                        </div>
+                    `;
+
+                    return;
+
+                }
+
+
+                productList.innerHTML = products.map(product => {
+
+                    const quantity = Number(product.available) || 0;
+
+                    const price = Number(product.price) || 0;
+
+                    const totalPrice = quantity * price;
+
+                    return `
+
+                        <div class="product-card">
+
+                            <div class="product-top">
+
+                                <div>
+
+                                    <div class="product-name">
+                                        ${escapeHTML(product.name)}
+                                    </div>
+
+                                    <div class="product-id">
+                                        ID: ${escapeHTML(product.productId)}
+                                    </div>
+
+                                </div>
+
+                                <span class="category-tag">
+                                    ${escapeHTML(product.category)}
+                                </span>
+
+                            </div>
+
+
+                            <div class="product-details">
+
+                                <div class="detail-item">
+
+                                    <span>Quantity</span>
+
+                                    <strong>
+                                        ${quantity} Units
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="detail-item">
+
+                                    <span>Per Piece Price</span>
+
+                                    <strong>
+                                        ${formatPrice(price)}
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="detail-item total">
+
+                                    <span>Total Price</span>
+
+                                    <strong>
+                                        ${formatPrice(totalPrice)}
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }).join("");
+
+            }
+
+
+            // ==================================
+            // HTML SECURITY
+            // ==================================
+
+            function escapeHTML(value) {
+
+                return String(value ?? "").replace(/[&<>"']/g, char => {
+
+                    const entities = {
+                        "&": "&amp;",
+                        "<": "&lt;",
+                        ">": "&gt;",
+                        '"': "&quot;",
+                        "'": "&#39;"
+                    };
+
+                    return entities[char];
+
+                });
+
+            }
+
+
+            // ==================================
+            // SEARCH EVENTS
+            // ==================================
+
+            searchInput.addEventListener("input", displayProducts);
+
+            categoryFilter.addEventListener("change", displayProducts);
+
+            sortFilter.addEventListener("change", displayProducts);
+
+
+            // ==================================
+            // INITIAL LOAD
+            // ==================================
+
+            loadProducts();
+
+
+</script>
+
+
+
+</html>
