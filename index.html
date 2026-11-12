@@ -19,53 +19,68 @@
 
         <!-- ================= HEADER ================= -->
 
+
+
         <header class="top-header">
 
-            <div class="header-main">
+    <div class="header-main">
 
-                <button class="menu-btn">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
+        <button class="menu-btn">
+            <i class="fa-solid fa-bars"></i>
+        </button>
 
-                <div class="brand">
-                    <div class="brand-icon">
-                        <i class="fa-solid fa-laptop"></i>
-                    </div>
+        <div class="brand">
 
-                    <div>
-                        <h1>RefurbTech</h1>
-                        <span>Smart. Tested. Reliable.</span>
-                    </div>
-                </div>
-
-                <button class="header-cart">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <b id="cartCount">0</b>
-                </button>
-
+            <div class="brand-icon">
+                <i class="fa-solid fa-store"></i>
             </div>
 
-
-            <div class="search-box">
-
-                <i class="fa-solid fa-magnifying-glass"></i>
-
-                <input
-                    type="text"
-                    placeholder="Search laptops, desktops & accessories">
-
-                <i class="fa-solid fa-microphone"></i>
-
+            <div class="brand-details">
+                <h1 id="shopName">YOUR SHOP NAME</h1>
+                <span>Quality Products • Trusted Service</span>
             </div>
 
-        </header>
+        </div>
+
+        <button class="header-cart" onclick="openCart()">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <b id="cartCount">0</b>
+        </button>
+
+    </div>
+
+
+    <div class="shop-contact">
+
+        <div class="shop-contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <span id="shopAddress">
+                Your Shop Address, City, Tamil Nadu
+            </span>
+        </div>
+
+        <a class="shop-contact-item"
+           id="shopPhoneLink"
+           href="tel:+919876543210">
+
+            <i class="fa-solid fa-phone"></i>
+            <span id="shopPhone">+91 98765 43210</span>
+
+        </a>
+
+    </div>
+
+</header>
+                
+            
+        
 
 
         <!-- ================= CATEGORY ================= -->
 
         <section class="categories">
 
-            <div class="category active" onclick="openCategory('All')">
+            <div class="category active">
                 <div class="category-icon">
                     <i class="fa-solid fa-house"></i>
                 </div>
@@ -114,42 +129,41 @@
 
         <section class="hero-banner">
 
-            <div class="hero-content">
+    <div class="hero-content">
 
-                <span class="hero-small">
-                    PREMIUM REFURBISHED
-                </span>
+        <span class="hero-small">
+            PREMIUM REFURBISHED TECHNOLOGY
+        </span>
 
-                <h2>
-                    Upgrade Your<br>
-                    Technology
-                </h2>
+        <h2>
+            12 Years of Trust.<br>
+            One Reliable Partner.
+        </h2>
 
-                <p>
-                    Quality tested laptops & desktops
-                    at amazing prices.
-                </p>
+        <p>
+            Delivering quality-tested laptops & desktops
+            with confidence since 2014.
+        </p>
 
-                <button class="shop-btn">
-                    Shop Now
-                    <i class="fa-solid fa-arrow-right"></i>
-                </button>
+        <button class="shop-btn" onclick="openCategory('All')">
+            Shop Now
+            <i class="fa-solid fa-arrow-right"></i>
+        </button>
 
-            </div>
+    </div>
 
-            <div class="hero-product">
+    <div class="hero-product">
 
-                <i class="fa-solid fa-laptop"></i>
+        <i class="fa-solid fa-laptop"></i>
 
-                <div class="starting-price">
-                    Starting
-                    <strong>₹14,999</strong>
-                </div>
+        <div class="starting-price">
+            Starting From
+            <strong>₹14,999</strong>
+        </div>
 
-            </div>
+    </div>
 
-        </section>
-
+</section>
 
         <!-- ================= QUICK FEATURES ================= -->
 
@@ -243,89 +257,34 @@
 
         <section class="product-section latest-section">
 
-            <div class="section-header">
+    <div class="section-header">
 
-                <div>
+        <div>
+            <span class="section-label">
+                JUST ARRIVED
+            </span>
 
-                    <span class="section-label">
-                        JUST ARRIVED
-                    </span>
+            <h2>Latest Laptops</h2>
+        </div>
 
-                    <h2>
-                        Latest Laptops
-                    </h2>
+        <button class="view-all"
+                onclick="openCategory('LAPTOP')">
+            View All
+        </button>
 
-                </div>
+    </div>
 
-                <button class="view-all">
-                    View All
-                </button>
+    <!-- DYNAMIC PRODUCTS -->
 
-            </div>
+    <div class="mini-product-scroll" id="latestProducts">
 
+        <div class="latest-loading">
+            Loading latest products...
+        </div>
 
-            <div class="mini-product-scroll">
+    </div>
 
-                <div class="mini-product">
-
-                    <div class="mini-image">
-                        <i class="fa-solid fa-laptop"></i>
-                    </div>
-
-                    <span>LAPTOP</span>
-
-                    <h3>
-                        Dell Latitude
-                    </h3>
-
-                    <strong>
-                        ₹31,999
-                    </strong>
-
-                </div>
-
-
-                <div class="mini-product">
-
-                    <div class="mini-image">
-                        <i class="fa-solid fa-laptop"></i>
-                    </div>
-
-                    <span>LAPTOP</span>
-
-                    <h3>
-                        HP ProBook
-                    </h3>
-
-                    <strong>
-                        ₹26,999
-                    </strong>
-
-                </div>
-
-
-                <div class="mini-product">
-
-                    <div class="mini-image">
-                        <i class="fa-solid fa-laptop"></i>
-                    </div>
-
-                    <span>LAPTOP</span>
-
-                    <h3>
-                        Lenovo ThinkPad
-                    </h3>
-
-                    <strong>
-                        ₹29,499
-                    </strong>
-
-                </div>
-
-            </div>
-
-        </section>
-
+</section>
 
 
         <!-- ================= BOTTOM NAV ================= -->
@@ -746,6 +705,151 @@ function updateCartCount() {
     document.getElementById("bottomCartCount").textContent = total;
 
 }
+
+const latestProductsContainer =
+    document.getElementById("latestProducts");
+
+
+// ==================================
+// CURRENCY FORMAT
+// ==================================
+
+function latestFormatPrice(price) {
+
+    return new Intl.NumberFormat("en-IN", {
+        style: "currency",
+        currency: "INR",
+        maximumFractionDigits: 0
+    }).format(Number(price) || 0);
+
+}
+
+
+// ==================================
+// HTML SECURITY
+// ==================================
+
+function latestEscapeHTML(value) {
+
+    return String(value ?? "").replace(/[&<>"']/g, char => {
+
+        const entities = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        };
+
+        return entities[char];
+
+    });
+
+}
+
+
+// ==================================
+// LOAD LATEST LAPTOPS
+// ==================================
+
+async function loadLatestProducts() {
+
+    try {
+
+        latestProductsContainer.innerHTML = `
+            <div class="latest-loading">
+                Loading latest products...
+            </div>
+        `;
+
+        const response = await fetch(
+            "/api/products?category=LAPTOP&limit=3"
+        );
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+            throw new Error("Unable to load latest products");
+        }
+
+        const products = result.products || [];
+
+        if (products.length === 0) {
+
+            latestProductsContainer.innerHTML = `
+                <div class="latest-empty">
+                    No latest laptops available.
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        // DISPLAY LATEST 3 PRODUCTS
+
+        latestProductsContainer.innerHTML = products.map(product => {
+
+            const image = product.images?.[0];
+
+            const imageHTML = image
+                ? `<img src="${latestEscapeHTML(image)}"
+                        alt="${latestEscapeHTML(product.name)}"
+                        loading="lazy"
+                        onerror="this.outerHTML='<i class=&quot;fa-solid fa-laptop&quot;></i>'">`
+                : `<i class="fa-solid fa-laptop"></i>`;
+
+            return `
+
+                <div class="mini-product"
+                     onclick="window.location.href='list.html?id=${encodeURIComponent(product.productId)}'">
+
+                    <div class="mini-image">
+
+                        ${imageHTML}
+
+                    </div>
+
+                    <span>
+                        ${latestEscapeHTML(product.category)}
+                    </span>
+
+                    <h3>
+                        ${latestEscapeHTML(product.name)}
+                    </h3>
+
+                    <strong>
+                        ${latestFormatPrice(product.price)}
+                    </strong>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+
+    } catch (error) {
+
+        console.error("Latest Products Error:", error);
+
+        latestProductsContainer.innerHTML = `
+            <div class="latest-empty">
+                Unable to load latest products.
+            </div>
+        `;
+
+    }
+
+}
+
+
+// ==================================
+// INITIAL LOAD
+// ==================================
+
+loadLatestProducts();
 
 
 // =========================================

@@ -381,7 +381,7 @@
 
 </div>
 
-
+<script src="function.js"></script>
 
 <script>
 
@@ -646,6 +646,9 @@ async function placeOrder() {
 
     try {
 
+        AppLoader.show("Please Wait...");
+
+
        const response = await fetch(
     "/api/orders",
     {
@@ -660,6 +663,7 @@ async function placeOrder() {
 );
 
         const result = await response.json();
+
 
 
         if (!response.ok) {
@@ -682,6 +686,7 @@ async function placeOrder() {
 
 
         // Save latest order locally
+
         localStorage.setItem(
             "latestOrder",
             JSON.stringify(result.order)
@@ -689,6 +694,7 @@ async function placeOrder() {
 
 
         // Clear cart
+
         localStorage.removeItem("cart");
 
 
@@ -696,7 +702,7 @@ async function placeOrder() {
             "Order placed successfully! 🎉"
         );
 
-
+AppLoader.hide();
         // Later we'll create this page
 
          window.location.href = "ordersuccess.html";

@@ -398,6 +398,8 @@ app.get("/api/admin/orders/pending", async (req, res) => {
 
 app.patch("/api/admin/orders/:orderId/complete", async (req, res) => {
 
+    const session = await mongoose.startSession();
+
     try {
 
         if (!req.session.masterAdmin) {
@@ -407,42 +409,130 @@ app.patch("/api/admin/orders/:orderId/complete", async (req, res) => {
             });
         }
 
-        const order = await Order.findOne({
-            orderId: req.params.orderId
+        let completedOrder = false;
+
+        await session.withTransaction(async () => {
+
+            // 1. FIND PENDING ORDER
+
+            const order = await Order.findOne({
+                orderId: req.params.orderId,
+                orderStatus: "Pending"
+            }).session(session);
+
+            if (!order) {
+                throw new Error("ORDER_NOT_PENDING");
+            }
+
+            // 2. VALIDATE ORDER PRODUCTS
+
+            if (!order.products || order.products.length === 0) {
+                throw new Error("NO_ORDER_PRODUCTS");
+            }
+
+            // 3. COMBINE DUPLICATE PRODUCT ITEMS
+
+            const stockItems = new Map();
+
+            for (const item of order.products) {
+
+                const productId = item.productId;
+                const quantity = Number(item.quantity);
+
+                if (
+                    !productId ||
+                    !Number.isInteger(quantity) ||
+                    quantity <= 0
+                ) {
+                    throw new Error("INVALID_ORDER_QUANTITY");
+                }
+
+                stockItems.set(
+                    productId,
+                    (stockItems.get(productId) || 0) + quantity
+                );
+
+            }
+
+            // 4. REDUCE PRODUCT STOCK
+
+            for (const [productId, quantity] of stockItems) {
+
+                const result = await Product.updateOne(
+                    {
+                        productId: productId,
+                        available: { $gte: quantity }
+                    },
+                    {
+                        $inc: { available: -quantity }
+                    },
+                    { session }
+                );
+
+                if (result.modifiedCount !== 1) {
+                    throw new Error("INSUFFICIENT_STOCK");
+                }
+
+            }
+
+            // 5. COMPLETE ORDER
+
+            order.orderStatus = "Completed";
+            order.completedAt = new Date();
+
+            await order.save({ session });
+
+            completedOrder = true;
+
         });
 
-        if (!order) {
-            return res.status(404).json({
-                success: false,
-                message: "Order not found"
+        if (completedOrder) {
+            return res.json({
+                success: true,
+                message: "Order completed and stock updated successfully"
             });
         }
-
-        if (order.orderStatus !== "Pending") {
-            return res.status(400).json({
-                success: false,
-                message: "Only pending orders can be completed"
-            });
-        }
-
-        order.orderStatus = "Completed";
-        order.completedAt = new Date();
-
-        await order.save();
-
-        res.json({
-            success: true,
-            message: "Order completed successfully"
-        });
 
     } catch (error) {
 
         console.error("Complete Order Error:", error);
 
+        if (error.message === "ORDER_NOT_PENDING") {
+            return res.status(400).json({
+                success: false,
+                message: "Order is not pending or already completed"
+            });
+        }
+
+        if (error.message === "NO_ORDER_PRODUCTS") {
+            return res.status(400).json({
+                success: false,
+                message: "No products found in this order"
+            });
+        }
+
+        if (error.message === "INVALID_ORDER_QUANTITY") {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid product quantity in order"
+            });
+        }
+
+        if (error.message === "INSUFFICIENT_STOCK") {
+            return res.status(400).json({
+                success: false,
+                message: "Insufficient stock. Order cannot be completed."
+            });
+        }
+
         res.status(500).json({
             success: false,
             message: "Unable to complete order"
         });
+
+    } finally {
+
+        await session.endSession();
 
     }
 
@@ -829,8 +919,10 @@ app.get("/api/products", async (req, res) => {
         const { category, search, limit } = req.query;
 
         // Active Products மட்டும்
+
         const filter = {
-            isActive: true
+            isActive: true,
+            available: { $gte: 1}
         };
 
         // Category Filter
@@ -944,6 +1036,54 @@ app.get("/api/admin/products", async (req, res) => {
 
 
 
+
+// ==================================
+// ADMIN - STOCK VIEW API
+// ==================================
+
+app.get("/api/admin/stock", async (req, res) => {
+
+    try {
+
+        if (!req.session.masterAdmin) {
+            return res.status(401).json({
+                success: false,
+                message: "Unauthorized access"
+            });
+        }
+
+        const products = await Product.find({
+            isActive: true,
+            available: { $gte: 1 }
+        })
+        .select("productId name category available")
+        .sort({ name: 1 })
+        .lean();
+
+        const totalQuantity = products.reduce(
+            (total, product) => total + product.available,
+            0
+        );
+
+        res.json({
+            success: true,
+            count: products.length,
+            totalQuantity,
+            products
+        });
+
+    } catch (error) {
+
+        console.error("Stock View Error:", error);
+
+        res.status(500).json({
+            success: false,
+            message: "Unable to fetch stock"
+        });
+
+    }
+
+});
 
 
 

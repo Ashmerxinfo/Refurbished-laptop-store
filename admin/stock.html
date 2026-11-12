@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Stock View | RefurbTech Admin</title>
+
+    <link rel="stylesheet" href="stock.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <!-- HEADER -->
+
+    <header class="page-header">
+
+        <div>
+            <h2>Stock View</h2>
+            <p>Available product stock details</p>
+        </div>
+
+        <a href="settings.html" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back
+        </a>
+
+    </header>
+
+
+    <!-- SUMMARY -->
+
+    <section class="summary-grid">
+
+        <div class="summary-card">
+            <span>Available Products</span>
+            <h2 id="totalProducts">0</h2>
+            <small>Products in stock</small>
+        </div>
+
+        <div class="summary-card">
+            <span>Total Quantity</span>
+            <h2 id="totalQuantity">0</h2>
+            <small>Available stock units</small>
+        </div>
+
+    </section>
+
+
+    <!-- STOCK LIST -->
+
+    <section class="stock-section">
+
+        <div class="section-heading">
+
+            <div>
+                <h3>Available Stock</h3>
+                <p>Currently available products</p>
+            </div>
+
+            <span class="stock-count" id="stockCount">
+                0 Items
+            </span>
+
+        </div>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search product name or ID..."
+            >
+
+        </div>
+
+
+        <!-- CATEGORY FILTER -->
+
+        <div class="filter-row">
+
+            <select id="categoryFilter">
+
+                <option value="ALL">All Categories</option>
+                <option value="LAPTOP">Laptop</option>
+                <option value="DESKTOP">Desktop</option>
+                <option value="ACCESSORY">Accessory</option>
+                <option value="STORAGE">Storage</option>
+                <option value="RAM">RAM</option>
+
+            </select>
+
+            <select id="sortFilter">
+
+                <option value="name">Product Name</option>
+                <option value="high">Stock: High to Low</option>
+                <option value="low">Stock: Low to High</option>
+
+            </select>
+
+        </div>
+
+
+        <!-- STOCK PRODUCTS -->
+
+        <div id="stockList" class="stock-list">
+
+            <div class="loading">
+                Loading stock...
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+<script>
+
+                    
+                const stockList = document.getElementById("stockList");
+
+                const totalProducts = document.getElementById("totalProducts");
+                const totalQuantity = document.getElementById("totalQuantity");
+                const stockCount = document.getElementById("stockCount");
+
+                const searchInput = document.getElementById("searchInput");
+                const categoryFilter = document.getElementById("categoryFilter");
+                const sortFilter = document.getElementById("sortFilter");
+
+                let allStockProducts = [];
+
+
+                // ==================================
+                // FETCH STOCK DATA
+                // ==================================
+
+                async function loadStock() {
+
+                    try {
+
+                        stockList.innerHTML = `
+                            <div class="loading">Loading stock...</div>
+                        `;
+
+                        const response = await fetch("/api/admin/stock");
+
+                        if (response.status === 401) {
+                            window.location.href = "/admin-login.html";
+                            return;
+                        }
+
+                        const result = await response.json();
+
+                        if (!response.ok || !result.success) {
+                            throw new Error(result.message || "Unable to load stock");
+                        }
+
+                        allStockProducts = result.products || [];
+
+                        updateStockSummary();
+
+                        displayStock();
+
+                    } catch (error) {
+
+                        console.error("Stock View Error:", error);
+
+                        stockList.innerHTML = `
+                            <div class="empty-state">
+                                Unable to load stock. Please try again.
+                            </div>
+                        `;
+
+                    }
+
+                }
+
+
+                // ==================================
+                // UPDATE SUMMARY
+                // ==================================
+
+                function updateStockSummary() {
+
+                    const availableProducts = allStockProducts.filter(
+                        product => Number(product.available) >= 1
+                    );
+
+                    const totalUnits = availableProducts.reduce(
+                        (total, product) => {
+                            return total + Number(product.available);
+                        },
+                        0
+                    );
+
+                    totalProducts.textContent = availableProducts.length;
+
+                    totalQuantity.textContent = totalUnits;
+
+                }
+
+
+                // ==================================
+                // FILTER AND SORT
+                // ==================================
+
+                function getFilteredStock() {
+
+                    let products = allStockProducts.filter(
+                        product => Number(product.available) >= 1
+                    );
+
+                    const search = searchInput.value.trim().toLowerCase();
+
+                    const category = categoryFilter.value;
+
+                    const sort = sortFilter.value;
+
+
+                    // SEARCH
+
+                    if (search) {
+
+                        products = products.filter(product => {
+
+                            return (
+                                (product.name || "").toLowerCase().includes(search) ||
+                                (product.productId || "").toLowerCase().includes(search) ||
+                                (product.category || "").toLowerCase().includes(search)
+                            );
+
+                        });
+
+                    }
+
+
+                    // CATEGORY
+
+                    if (category !== "ALL") {
+
+                        products = products.filter(
+                            product => product.category === category
+                        );
+
+                    }
+
+
+                    // SORT
+
+                    if (sort === "name") {
+
+                        products.sort((a, b) =>
+                            a.name.localeCompare(b.name)
+                        );
+
+                    } else if (sort === "high") {
+
+                        products.sort((a, b) =>
+                            Number(b.available) - Number(a.available)
+                        );
+
+                    } else if (sort === "low") {
+
+                        products.sort((a, b) =>
+                            Number(a.available) - Number(b.available)
+                        );
+
+                    }
+
+                    return products;
+
+                }
+
+
+                // ==================================
+                // HTML SECURITY
+                // ==================================
+
+                function escapeHTML(value) {
+
+                    return String(value ?? "").replace(/[&<>"']/g, char => {
+
+                        const entities = {
+                            "&": "&amp;",
+                            "<": "&lt;",
+                            ">": "&gt;",
+                            '"': "&quot;",
+                            "'": "&#39;"
+                        };
+
+                        return entities[char];
+
+                    });
+
+                }
+
+
+                // ==================================
+                // DISPLAY STOCK
+                // ==================================
+
+                function displayStock() {
+
+                    const products = getFilteredStock();
+
+                    stockCount.textContent = `${products.length} Items`;
+
+                    if (products.length === 0) {
+
+                        stockList.innerHTML = `
+                            <div class="empty-state">
+                                No available stock found.
+                            </div>
+                        `;
+
+                        return;
+
+                    }
+
+
+                    stockList.innerHTML = products.map(product => {
+
+                        const quantity = Number(product.available) || 0;
+
+                        return `
+
+                            <div class="stock-card">
+
+                                <div class="stock-card-top">
+
+                                    <div>
+
+                                        <div class="stock-product-name">
+                                            ${escapeHTML(product.name)}
+                                        </div>
+
+                                        <div class="stock-product-id">
+                                            ID: ${escapeHTML(product.productId)}
+                                        </div>
+
+                                    </div>
+
+                                    <span class="category-tag">
+                                        ${escapeHTML(product.category)}
+                                    </span>
+
+                                </div>
+
+
+                                <div class="stock-quantity">
+
+                                    <span>Available Quantity</span>
+
+                                    <strong>
+                                        ${quantity} Units
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                        `;
+
+                    }).join("");
+
+                }
+
+
+                // ==================================
+                // EVENT LISTENERS
+                // ==================================
+
+                searchInput.addEventListener("input", displayStock);
+
+                categoryFilter.addEventListener("change", displayStock);
+
+                sortFilter.addEventListener("change", displayStock);
+
+
+                // ==================================
+                // INITIAL LOAD
+                // ==================================
+
+                loadStock();
+
+
+</script>
+
+</body>
+</html>
