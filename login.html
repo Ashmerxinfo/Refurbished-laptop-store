@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | RefurbTech</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+    <div class="login-container">
+
+        <div class="login-box">
+
+            <div class="logo">
+                <div class="logo-icon">R</div>
+                <h2>REFURBTECH</h2>
+                <p>Admin Control Panel</p>
+            </div>
+
+            <div class="login-heading">
+                <h3>Welcome Back!</h3>
+                <p>Login to manage your store</p>
+            </div>
+
+            <form id="loginForm">
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter admin email"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter password"
+                        required
+                    >
+                </div>
+
+                <button type="submit" id="loginBtn">
+                    Login to Dashboard
+                </button>
+
+            </form>
+
+            <a href="index.html" class="back-link">
+                ← Back to Store
+            </a>
+
+            <div class="footer">
+                Powered by AshmerX Infotech
+            </div>
+
+        </div>
+
+    </div>
+
+    
+</body>
+
+<script>
+
+   const loginForm = document.getElementById("loginForm");
+
+loginForm.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    if (!email || !password) {
+        alert("Please enter email and password");
+        return;
+    }
+
+    const loginBtn = document.getElementById("loginBtn");
+
+    try {
+
+        loginBtn.disabled = true;
+        loginBtn.textContent = "Checking Login...";
+
+        const response = await fetch("/api/admin/master-login", {
+    method: "POST",
+    credentials: "same-origin",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ email, password })
+});
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+            alert(result.message || "Invalid Email or Password");
+            return;
+        }
+
+        window.location.href = "admin/settings.html";
+
+    } catch (error) {
+
+        console.error("Login Error:", error);
+        alert("Server connection failed. Please try again.");
+
+    } finally {
+
+        loginBtn.disabled = false;
+        loginBtn.textContent = "Login as Master Admin";
+
+    }
+
+});
+
+</script>
+</html>

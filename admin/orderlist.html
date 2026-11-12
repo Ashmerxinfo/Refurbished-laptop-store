@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pending Orders | RefurbTech</title>
+
+    <link rel="stylesheet" href="orderlist.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="orders-container">
+
+        <!-- HEADER -->
+
+        <header class="page-header">
+
+            <div class="header-left">
+
+                <button class="back-btn" onclick="history.back()">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+
+                <div>
+                    <h2>Order List</h2>
+                    <p>Manage customer orders</p>
+                </div>
+
+            </div>
+
+            <button class="refresh-btn" id="refreshOrders">
+                <i class="fa-solid fa-rotate"></i>
+                Refresh
+            </button>
+
+        </header>
+
+
+        <!-- SUMMARY -->
+
+        <section class="summary-section">
+
+            <div class="summary-card">
+
+                <div class="summary-icon">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+
+                <div>
+                    <p>Pending Orders</p>
+                    <h2 id="pendingCount">0</h2>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SEARCH -->
+
+        <section class="search-section">
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="orderSearch"
+                    placeholder="Search Order ID, Customer Name or Phone..."
+                >
+
+                <button id="clearSearch" type="button">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ORDER HEADING -->
+
+        <section class="list-heading">
+
+            <div>
+                <h3>Pending Orders</h3>
+                <p id="resultCount">0 orders found</p>
+            </div>
+
+        </section>
+
+
+        <!-- ORDER LIST -->
+
+        <main id="ordersList" class="orders-list">
+
+            <div class="loading-state">
+                <i class="fa-solid fa-spinner fa-spin"></i>
+                <p>Loading Orders...</p>
+            </div>
+
+        </main>
+
+
+        <!-- TOAST -->
+
+        <div id="toastMessage" class="toast-message"></div>
+
+    </div>
+
+
+    <script src="orderslist.js"></script>
+
+</body>
+
+</html>

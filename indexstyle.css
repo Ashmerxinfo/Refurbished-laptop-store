@@ -1,3 +1,7 @@
+/* =========================================
+   REFURBTECH - MAIN STYLESHEET
+========================================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -355,42 +359,72 @@ button {
     box-shadow: 0 2px 9px rgba(0, 0, 0, 0.05);
 }
 
+
+/* ================= PRODUCT IMAGE ================= */
+
 .product-image {
-    height: 135px;
+    height: 165px;
+    min-height: 165px;
+    width: 100%;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f0f3f8;
+    background: #ffffff;
+    overflow: hidden;
+    padding: 34px 10px 8px;
 }
+
+/* Product Image */
+
+.product-photo {
+    display: block;
+    width: 100%;
+    height: 120px;
+    max-width: 100%;
+    object-fit: contain;
+    object-position: center;
+    padding: 0;
+    transform: none;
+    position: relative;
+    z-index: 1;
+}
+
+/* Fallback Icon */
 
 .product-icon {
     font-size: 62px;
     color: #687386;
 }
 
-.product-badge {
+/* Product Badge */
+
+.product-image .product-badge {
     position: absolute;
-    top: 8px;
-    left: 8px;
+    top: 9px;
+    left: 9px;
     background: #2874f0;
     color: #fff;
     padding: 4px 6px;
     border-radius: 5px;
     font-size: 7px;
     font-weight: 800;
+    z-index: 5;
 }
 
-.wishlist-btn {
+/* Wishlist */
+
+.product-image .wishlist-btn {
     position: absolute;
-    right: 7px;
-    top: 7px;
+    right: 8px;
+    top: 8px;
     width: 28px;
     height: 28px;
     border-radius: 50%;
     background: #fff;
     color: #6d7583;
     box-shadow: 0 2px 7px rgba(0, 0, 0, 0.08);
+    z-index: 5;
 }
 
 
@@ -665,7 +699,12 @@ button {
     }
 
     .product-image {
-        height: 120px;
+        height: 145px;
+        min-height: 145px;
+    }
+
+    .product-photo {
+        height: 105px;
     }
 
     .product-info h3 {

@@ -65,42 +65,42 @@
 
         <section class="categories">
 
-            <div class="category active">
+            <div class="category active" onclick="openCategory('All')">
                 <div class="category-icon">
                     <i class="fa-solid fa-house"></i>
                 </div>
                 <span>Home</span>
             </div>
 
-            <div class="category">
+            <div class="category" onclick="openCategory('LAPTOP')">
                 <div class="category-icon">
                     <i class="fa-solid fa-laptop"></i>
                 </div>
                 <span>Laptops</span>
             </div>
 
-            <div class="category">
+            <div class="category" onclick="openCategory('DESKTOP')">
                 <div class="category-icon">
                     <i class="fa-solid fa-desktop"></i>
                 </div>
                 <span>Desktops</span>
             </div>
 
-            <div class="category">
+            <div class="category" onclick="openCategory('ACCESSORY')">
                 <div class="category-icon">
                     <i class="fa-solid fa-headphones"></i>
                 </div>
                 <span>Accessories</span>
             </div>
 
-            <div class="category">
+            <div class="category" onclick="openCategory('STORAGE')">
                 <div class="category-icon">
                     <i class="fa-solid fa-hard-drive"></i>
                 </div>
                 <span>Storage</span>
             </div>
 
-            <div class="category">
+            <div class="category" onclick="openCategory('RAM')">
                 <div class="category-icon">
                     <i class="fa-solid fa-memory"></i>
                 </div>
@@ -217,674 +217,23 @@
 
                 </div>
 
-                <button class="view-all">
+                <button class="view-all" onclick="window.location.href = 'Allproduct.html'">
                     View All
                 </button>
 
             </div>
 
 
-            <div class="product-grid">
+            
 
 
-                <!-- PRODUCT 1 -->
+               <div class="product-grid" id="recommendedProducts">
 
-                <article class="product-card">
+    <p class="loading-text">Loading Products...</p>
 
-                    <div class="product-image">
+</div>
 
-                        <span class="product-badge">
-                            BEST SELLER
-                        </span>
-
-                        <button class="wishlist-btn">
-                            <i class="fa-regular fa-heart"></i>
-                        </button>
-
-                        <i class="fa-solid fa-laptop product-icon"></i>
-
-                    </div>
-
-
-                    <div class="product-info">
-
-                        <span class="product-category">
-                            LAPTOP
-                        </span>
-
-                        <h3>
-                            Dell Latitude 7420
-                        </h3>
-
-                        <p class="short-spec">
-                            i7 • 16GB • 512GB SSD
-                        </p>
-
-                        <div class="rating">
-                            <span>
-                                ⭐ 4.8
-                            </span>
-
-                            <small>
-                                (24)
-                            </small>
-                        </div>
-
-
-                        <div class="price-row">
-
-                            <strong>
-                                ₹34,000
-                            </strong>
-
-                            <del>
-                                ₹52,000
-                            </del>
-
-                        </div>
-
-
-                        <!-- QUANTITY -->
-
-                        <div class="quantity-row">
-
-                            <span>Qty</span>
-
-                            <div class="quantity-control">
-
-                                <button class="qty-minus">
-                                    −
-                                </button>
-
-                                <span class="qty-value">
-                                    1
-                                </span>
-
-                                <button class="qty-plus">
-                                    +
-                                </button>
-
-                            </div>
-
-                        </div>
-
-
-                        <small class="available">
-                            Available: 5
-                        </small>
-
-
-                        <button class="add-cart-btn">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Add to Cart
-                        </button>
-
-
-                        <button
-                            class="details-btn"
-                            onclick="openProduct('dell-latitude-7420')">
-
-                            View Details
-
-                            <i class="fa-solid fa-chevron-right"></i>
-
-                        </button>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- PRODUCT 2 -->
-
-                <article class="product-card">
-
-                    <div class="product-image">
-
-                        <span class="product-badge">
-                            SALE
-                        </span>
-
-                        <button class="wishlist-btn">
-                            <i class="fa-regular fa-heart"></i>
-                        </button>
-
-                        <i class="fa-solid fa-laptop product-icon"></i>
-
-                    </div>
-
-
-                    <div class="product-info">
-
-                        <span class="product-category">
-                            LAPTOP
-                        </span>
-
-                        <h3>
-                            HP EliteBook 840 G7
-                        </h3>
-
-                        <p class="short-spec">
-                            i5 • 16GB • 512GB SSD
-                        </p>
-
-                        <div class="rating">
-                            <span>
-                                ⭐ 4.7
-                            </span>
-
-                            <small>
-                                (18)
-                            </small>
-                        </div>
-
-
-                        <div class="price-row">
-
-                            <strong>
-                                ₹28,500
-                            </strong>
-
-                            <del>
-                                ₹45,000
-                            </del>
-
-                        </div>
-
-
-                        <div class="quantity-row">
-
-                            <span>Qty</span>
-
-                            <div class="quantity-control">
-
-                                <button class="qty-minus">
-                                    −
-                                </button>
-
-                                <span class="qty-value">
-                                    1
-                                </span>
-
-                                <button class="qty-plus">
-                                    +
-                                </button>
-
-                            </div>
-
-                        </div>
-
-
-                        <small class="available">
-                            Available: 4
-                        </small>
-
-
-                        <button class="add-cart-btn">
-
-                            <i class="fa-solid fa-cart-shopping"></i>
-
-                            Add to Cart
-
-                        </button>
-
-
-                        <button
-                            class="details-btn"
-                            onclick="openProduct('hp-elitebook-840-g7')">
-
-                            View Details
-
-                            <i class="fa-solid fa-chevron-right"></i>
-
-                        </button>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- PRODUCT 3 -->
-
-                <article class="product-card">
-
-                    <div class="product-image">
-
-                        <span class="product-badge">
-                            DEAL
-                        </span>
-
-                        <button class="wishlist-btn">
-                            <i class="fa-regular fa-heart"></i>
-                        </button>
-
-                        <i class="fa-solid fa-desktop product-icon"></i>
-
-                    </div>
-
-
-                    <div class="product-info">
-
-                        <span class="product-category">
-                            DESKTOP
-                        </span>
-
-                        <h3>
-                            Dell OptiPlex 7080
-                        </h3>
-
-                        <p class="short-spec">
-                            i7 • 16GB • 512GB SSD
-                        </p>
-
-                        <div class="rating">
-                            <span>
-                                ⭐ 4.6
-                            </span>
-
-                            <small>
-                                (12)
-                            </small>
-                        </div>
-
-
-                        <div class="price-row">
-
-                            <strong>
-                                ₹25,000
-                            </strong>
-
-                            <del>
-                                ₹39,000
-                            </del>
-
-                        </div>
-
-
-                        <div class="quantity-row">
-
-                            <span>Qty</span>
-
-                            <div class="quantity-control">
-
-                                <button class="qty-minus">
-                                    −
-                                </button>
-
-                                <span class="qty-value">
-                                    1
-                                </span>
-
-                                <button class="qty-plus">
-                                    +
-                                </button>
-
-                            </div>
-
-                        </div>
-
-
-                        <small class="available">
-                            Available: 8
-                        </small>
-
-
-                        <button class="add-cart-btn">
-
-                            <i class="fa-solid fa-cart-shopping"></i>
-
-                            Add to Cart
-
-                        </button>
-
-
-                        <button
-                            class="details-btn"
-                            onclick="openProduct('dell-optiplex-7080')">
-
-                            View Details
-
-                            <i class="fa-solid fa-chevron-right"></i>
-
-                        </button>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- PRODUCT 4 -->
-
-                <article class="product-card">
-
-                    <div class="product-image">
-
-                        <span class="product-badge">
-                            NEW
-                        </span>
-
-                        <button class="wishlist-btn">
-                            <i class="fa-regular fa-heart"></i>
-                        </button>
-
-                        <i class="fa-solid fa-keyboard product-icon"></i>
-
-                    </div>
-
-
-                    <div class="product-info">
-
-                        <span class="product-category">
-                            ACCESSORY
-                        </span>
-
-                        <h3>
-                            Wireless Keyboard
-                        </h3>
-
-                        <p class="short-spec">
-                            USB • Wireless • Compact
-                        </p>
-
-                        <div class="rating">
-                            <span>
-                                ⭐ 4.5
-                            </span>
-
-                            <small>
-                                (31)
-                            </small>
-                        </div>
-
-
-                        <div class="price-row">
-
-                            <strong>
-                                ₹899
-                            </strong>
-
-                            <del>
-                                ₹1,499
-                            </del>
-
-                        </div>
-
-
-                        <div class="quantity-row">
-
-                            <span>Qty</span>
-
-                            <div class="quantity-control">
-
-                                <button class="qty-minus">
-                                    −
-                                </button>
-
-                                <span class="qty-value">
-                                    1
-                                </span>
-
-                                <button class="qty-plus">
-                                    +
-                                </button>
-
-                            </div>
-
-                        </div>
-
-
-                        <small class="available">
-                            Available: 15
-                        </small>
-
-
-                        <button class="add-cart-btn">
-
-                            <i class="fa-solid fa-cart-shopping"></i>
-
-                            Add to Cart
-
-                        </button>
-
-
-                        <button
-                            class="details-btn"
-                            onclick="openProduct('wireless-keyboard')">
-
-                            View Details
-
-                            <i class="fa-solid fa-chevron-right"></i>
-
-                        </button>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- PRODUCT 5 -->
-
-                <article class="product-card">
-
-                    <div class="product-image">
-
-                        <span class="product-badge">
-                            DEAL
-                        </span>
-
-                        <button class="wishlist-btn">
-                            <i class="fa-regular fa-heart"></i>
-                        </button>
-
-                        <i class="fa-solid fa-laptop product-icon"></i>
-
-                    </div>
-
-
-                    <div class="product-info">
-
-                        <span class="product-category">
-                            LAPTOP
-                        </span>
-
-                        <h3>
-                            Lenovo ThinkPad T14
-                        </h3>
-
-                        <p class="short-spec">
-                            i5 • 16GB • 512GB SSD
-                        </p>
-
-                        <div class="rating">
-                            <span>
-                                ⭐ 4.8
-                            </span>
-
-                            <small>
-                                (21)
-                            </small>
-                        </div>
-
-
-                        <div class="price-row">
-
-                            <strong>
-                                ₹29,999
-                            </strong>
-
-                            <del>
-                                ₹44,000
-                            </del>
-
-                        </div>
-
-
-                        <div class="quantity-row">
-
-                            <span>Qty</span>
-
-                            <div class="quantity-control">
-
-                                <button class="qty-minus">
-                                    −
-                                </button>
-
-                                <span class="qty-value">
-                                    1
-                                </span>
-
-                                <button class="qty-plus">
-                                    +
-                                </button>
-
-                            </div>
-
-                        </div>
-
-
-                        <small class="available">
-                            Available: 3
-                        </small>
-
-
-                        <button class="add-cart-btn">
-
-                            <i class="fa-solid fa-cart-shopping"></i>
-
-                            Add to Cart
-
-                        </button>
-
-
-                        <button
-                            class="details-btn"
-                            onclick="openProduct('lenovo-thinkpad-t14')">
-
-                            View Details
-
-                            <i class="fa-solid fa-chevron-right"></i>
-
-                        </button>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- PRODUCT 6 -->
-
-                <article class="product-card">
-
-                    <div class="product-image">
-
-                        <span class="product-badge">
-                            SALE
-                        </span>
-
-                        <button class="wishlist-btn">
-                            <i class="fa-regular fa-heart"></i>
-                        </button>
-
-                        <i class="fa-solid fa-desktop product-icon"></i>
-
-                    </div>
-
-
-                    <div class="product-info">
-
-                        <span class="product-category">
-                            DESKTOP
-                        </span>
-
-                        <h3>
-                            HP ProDesk 600 G5
-                        </h3>
-
-                        <p class="short-spec">
-                            i5 • 16GB • 256GB SSD
-                        </p>
-
-                        <div class="rating">
-                            <span>
-                                ⭐ 4.6
-                            </span>
-
-                            <small>
-                                (15)
-                            </small>
-                        </div>
-
-
-                        <div class="price-row">
-
-                            <strong>
-                                ₹21,999
-                            </strong>
-
-                            <del>
-                                ₹35,000
-                            </del>
-
-                        </div>
-
-
-                        <div class="quantity-row">
-
-                            <span>Qty</span>
-
-                            <div class="quantity-control">
-
-                                <button class="qty-minus">
-                                    −
-                                </button>
-
-                                <span class="qty-value">
-                                    1
-                                </span>
-
-                                <button class="qty-plus">
-                                    +
-                                </button>
-
-                            </div>
-
-                        </div>
-
-
-                        <small class="available">
-                            Available: 6
-                        </small>
-
-
-                        <button class="add-cart-btn">
-
-                            <i class="fa-solid fa-cart-shopping"></i>
-
-                            Add to Cart
-
-                        </button>
-
-
-                        <button
-                            class="details-btn"
-                            onclick="openProduct('hp-prodesk-600-g5')">
-
-                            View Details
-
-                            <i class="fa-solid fa-chevron-right"></i>
-
-                        </button>
-
-                    </div>
-
-                </article>
-
-            </div>
+            
 
         </section>
 
@@ -994,7 +343,7 @@
             </button>
 
 
-            <button class="bottom-item">
+            <button class="bottom-item" onclick="window.location.href='Allproduct.html'">
 
                 <i class="fa-solid fa-layer-group"></i>
 
@@ -1035,12 +384,12 @@
             </button>
 
 
-            <button class="bottom-item">
+            <button class="bottom-item" onclick="window.location.href='login.html'">
 
-                <i class="fa-solid fa-gear"></i>
+                <i class="fa-solid fa-user"></i>
 
                 <span>
-                    Settings
+                    Login
                 </span>
 
             </button>
@@ -1054,249 +403,358 @@
 
     <script>
         
-        function opencart() {
-            window.location.href = "cart.html"
+        /* =========================================
+   REFURBTECH - DYNAMIC HOME PRODUCTS
+========================================= */
+
+// OPEN CART
+function opencart() {
+    window.location.href = "cart.html";
+}
+
+
+// PRODUCT DETAILS
+function openProduct(productId) {
+    window.location.href = "list.html?id=" + encodeURIComponent(productId);
+}
+
+
+// SAFE HTML TEXT
+function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[char]);
+}
+
+
+// GET MAIN PRODUCT IMAGE
+function getProductImage(product) {
+
+    // New schema: images is an array
+    if (Array.isArray(product.images)) {
+        return product.images[0] || "";
+    }
+
+    // Old schema: images.main
+    if (product.images && typeof product.images === "object") {
+        return product.images.main || "";
+    }
+
+    return "";
+}
+
+
+// FORMAT PRICE
+function formatPrice(price) {
+    return "₹" + Number(price || 0).toLocaleString("en-IN");
+}
+
+
+
+function openCategory(category) {
+
+    window.location.href =
+        "Allproduct.html?category=" + encodeURIComponent(category);
+
+}
+
+// =========================================
+// LOAD PRODUCTS FROM MONGODB
+// =========================================
+
+async function loadRecommendedProducts() {
+
+    const productGrid = document.getElementById("recommendedProducts");
+
+    try {
+
+        productGrid.innerHTML = "<p>Loading Products...</p>";
+
+        const response = await fetch("/api/products?limit=6");
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+            throw new Error(result.message || "Unable to load products");
         }
-        /*
-        ============================================
-        PRODUCT DETAILS
-        ============================================
-        */
 
-        function openProduct(productId) {
+        const products = result.products || [];
 
-            window.location.href =
-                "product-list.html?id=" + productId;
-
+        if (products.length === 0) {
+            productGrid.innerHTML = "<p>No Products Available</p>";
+            return;
         }
 
+        productGrid.innerHTML = products.map(product => {
 
-        /*
-        ============================================
-        QUANTITY
-        ============================================
-        */
+            const image = getProductImage(product);
 
-        document.querySelectorAll(".product-card").forEach(card => {
+            const imageHTML = image
+                ? `<img src="${escapeHTML(image)}"
+                        alt="${escapeHTML(product.name)}"
+                        class="product-photo">`
+                : `<i class="fa-solid ${escapeHTML(product.icon || "fa-laptop")} product-icon"></i>`;
 
-            const minus =
-                card.querySelector(".qty-minus");
+            const badgeHTML = product.badge
+                ? `<span class="product-badge">${escapeHTML(product.badge)}</span>`
+                : "";
 
-            const plus =
-                card.querySelector(".qty-plus");
+            const oldPriceHTML = Number(product.oldPrice) > 0
+                ? `<del>${formatPrice(product.oldPrice)}</del>`
+                : "";
 
-            const value =
-                card.querySelector(".qty-value");
+            return `
 
-            const availableText =
-                card.querySelector(".available");
+                <article class="product-card"
+                    data-product-id="${escapeHTML(product.productId)}">
+
+                    <div class="product-image">
+
+                        ${badgeHTML}
+
+                        <button class="wishlist-btn" type="button">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+
+                        ${imageHTML}
+
+                    </div>
+
+                    <div class="product-info">
+
+                        <span class="product-category">
+                            ${escapeHTML(product.category)}
+                        </span>
+
+                        <h3>${escapeHTML(product.name)}</h3>
+
+                        <p class="short-spec">
+                            ${escapeHTML(product.shortSpec)}
+                        </p>
+
+                        <div class="rating">
+                            <span>⭐ ${Number(product.rating || 0).toFixed(1)}</span>
+                            <small>(${Number(product.reviews || 0)})</small>
+                        </div>
+
+                        <div class="price-row">
+
+                            <strong>${formatPrice(product.price)}</strong>
+
+                            ${oldPriceHTML}
+
+                        </div>
+
+                        <div class="quantity-row">
+
+                            <span>Qty</span>
+
+                            <div class="quantity-control">
+
+                                <button class="qty-minus" type="button">−</button>
+
+                                <span class="qty-value">1</span>
+
+                                <button class="qty-plus" type="button">+</button>
+
+                            </div>
+
+                        </div>
+
+                        <small class="available">
+                            Available: ${Number(product.available || 0)}
+                        </small>
+
+                        <button class="add-cart-btn" type="button">
+
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            Add to Cart
+
+                        </button>
+
+                        <button class="details-btn"
+                            type="button"
+                            onclick="openProduct('${escapeHTML(product.productId)}')">
+
+                            View Details
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+            `;
+
+        }).join("");
+
+    } catch (error) {
+
+        console.error("Product Loading Error:", error);
+
+        productGrid.innerHTML = "<p>Unable to load products. Please try again.</p>";
+
+    }
+
+}
 
 
-            let available =
-                parseInt(
-                    availableText.textContent
-                    .replace("Available:", "")
-                );
+// =========================================
+// PRODUCT QUANTITY
+// =========================================
+
+document.addEventListener("click", function(event) {
+
+    const card = event.target.closest(".product-card");
+
+    if (!card) return;
+
+    const quantityElement = card.querySelector(".qty-value");
+
+    const available = Number(
+        card.querySelector(".available").textContent
+            .replace("Available:", "").trim()
+    );
+
+    let quantity = Number(quantityElement.textContent);
+
+    if (event.target.closest(".qty-plus")) {
+
+        if (quantity < available) {
+            quantity++;
+            quantityElement.textContent = quantity;
+        }
+
+    }
+
+    if (event.target.closest(".qty-minus")) {
+
+        if (quantity > 1) {
+            quantity--;
+            quantityElement.textContent = quantity;
+        }
+
+    }
+
+});
 
 
-            let quantity = 1;
+// =========================================
+// ADD TO CART
+// =========================================
 
+document.addEventListener("click", function(event) {
 
-            plus.addEventListener("click", () => {
+    const button = event.target.closest(".add-cart-btn");
 
-                if (quantity < available) {
+    if (!button) return;
 
-                    quantity++;
+    const card = button.closest(".product-card");
 
-                    value.textContent =
-                        quantity;
+    const productId = card.dataset.productId;
 
-                }
+    const productName = card.querySelector("h3").textContent.trim();
 
-            });
+    const quantity = Number(
+        card.querySelector(".qty-value").textContent
+    );
 
+    const price = Number(
+        card.querySelector(".price-row strong")
+            .textContent.replace(/[₹,]/g, "")
+    );
 
-            minus.addEventListener("click", () => {
+    const oldPriceText = card.querySelector(".price-row del")?.textContent || "0";
 
-                if (quantity > 1) {
+    const oldPrice = Number(
+        oldPriceText.replace(/[₹,]/g, "")
+    );
 
-                    quantity--;
+    const available = Number(
+        card.querySelector(".available").textContent
+            .replace("Available:", "").trim()
+    );
 
-                    value.textContent =
-                        quantity;
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-                }
+    const existing = cart.find(item =>
+        item.productId === productId ||
+        (!item.productId && item.name === productName)
+    );
 
-            });
+    if (existing) {
 
+        if (existing.quantity + quantity > available) {
+            alert("Maximum available stock reached!");
+            return;
+        }
+
+        existing.quantity += quantity;
+        existing.price = price;
+        existing.oldPrice = oldPrice;
+        existing.available = available;
+        existing.productId = productId;
+
+    } else {
+
+        cart.push({
+            productId,
+            name: productName,
+            price,
+            oldPrice,
+            available,
+            quantity
         });
 
+    }
 
-        /*
-        ============================================
-        ADD TO CART
-        ============================================
-        */
+    localStorage.setItem("cart", JSON.stringify(cart));
 
+    updateCartCount();
 
+    button.innerHTML = '<i class="fa-solid fa-check"></i> Added';
 
-            document.querySelectorAll(".add-cart-btn")
-                .forEach(button => {
+    setTimeout(() => {
+        button.innerHTML =
+            '<i class="fa-solid fa-cart-shopping"></i> Add to Cart';
+    }, 1200);
 
-        button.addEventListener("click", () => {
-
-            const card =
-                button.closest(".product-card");
-
-            const productName =
-                card.querySelector("h3")
-                    .textContent
-                    .trim();
-
-            const quantity =
-                parseInt(
-                    card.querySelector(".qty-value")
-                        .textContent
-                );
-
-            // PRICE
-            const priceText =
-                card.querySelector(".price-row strong")
-                    .textContent
-                    .replace(/[₹,]/g, "")
-                    .trim();
-
-            const price =
-                parseFloat(priceText) || 0;
+});
 
 
-            // OLD PRICE
-            const oldPriceText =
-                card.querySelector(".price-row del")
-                    .textContent
-                    .replace(/[₹,]/g, "")
-                    .trim();
+// =========================================
+// CART COUNT
+// =========================================
 
-            const oldPrice =
-                parseFloat(oldPriceText) || 0;
+function updateCartCount() {
 
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-            // AVAILABLE QUANTITY
-            const availableText =
-                card.querySelector(".available")
-                    .textContent
-                    .replace("Available:", "")
-                    .trim();
+    const total = cart.reduce(
+        (sum, item) => sum + Number(item.quantity || 0),
+        0
+    );
 
-            const available =
-                parseInt(availableText) || 0;
+    document.getElementById("cartCount").textContent = total;
+
+    document.getElementById("bottomCartCount").textContent = total;
+
+}
 
 
-            // GET CART
-            let cart =
-                JSON.parse(
-                    localStorage.getItem("cart")
-                ) || [];
+// =========================================
+// INITIALIZE HOME PAGE
+// =========================================
 
+updateCartCount();
 
-            // FIND EXISTING PRODUCT
-            const existing =
-                cart.find(
-                    item =>
-                        item.name === productName
-                );
-
-
-            if (existing) {
-
-                existing.quantity += quantity;
-
-                // Update missing price data
-                existing.price = price;
-                existing.oldPrice = oldPrice;
-                existing.available = available;
-
-            } else {
-
-                cart.push({
-
-                    name: productName,
-
-                    price: price,
-
-                    oldPrice: oldPrice,
-
-                    available: available,
-
-                    quantity: quantity
-
-                });
-
-            }
-
-
-            // SAVE CART
-            localStorage.setItem(
-                "cart",
-                JSON.stringify(cart)
-            );
-
-
-            // UPDATE CART COUNT
-            updateCartCount();
-
-
-            // BUTTON SUCCESS
-            button.innerHTML =
-                '<i class="fa-solid fa-check"></i> Added';
-
-
-            setTimeout(() => {
-
-                button.innerHTML =
-                    '<i class="fa-solid fa-cart-shopping"></i> Add to Cart';
-
-            }, 1200);
-
-        });
-
-    });
-
-        /*
-        ============================================
-        CART COUNT
-        ============================================
-        */
-
-        function updateCartCount() {
-
-            const cart =
-                JSON.parse(
-                    localStorage.getItem("cart")
-                ) || [];
-
-
-            const total =
-                cart.reduce(
-                    (sum, item) =>
-                        sum + item.quantity,
-                    0
-                );
-
-
-            document.getElementById(
-                "cartCount"
-            ).textContent = total;
-
-
-            document.getElementById(
-                "bottomCartCount"
-            ).textContent = total;
-
-        }
-
-
-        updateCartCount();
+loadRecommendedProducts();
 
     </script>
 

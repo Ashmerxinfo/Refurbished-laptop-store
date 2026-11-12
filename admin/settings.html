@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Settings | RefurbTech</title>
+
+    <link rel="stylesheet" href="/admin/settings.css">
+</head>
+
+<body>
+
+    <div class="app-wrapper">
+
+        <!-- HEADER -->
+
+        <header class="admin-header">
+
+            <div class="brand">
+                <h2>REFURBTECH</h2>
+                <span>Admin Panel</span>
+            </div>
+
+            <div class="admin-profile">
+                <div class="profile-icon">A</div>
+                <span>Master Admin</span>
+            </div>
+
+        </header>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="admin-container">
+
+            <section class="welcome-section">
+                <h2>Welcome Back!</h2>
+                <p>Manage your RefurbTech Store</p>
+            </section>
+
+
+            <!-- MENU -->
+
+            <section class="admin-menu">
+
+                <div class="menu-item" onclick="openPage('Addproduct.html')">
+
+                    <div class="menu-icon blue">＋</div>
+
+                    <h3>Add Product</h3>
+
+                    <p>Add new products to your store</p>
+
+                    <span class="menu-arrow">→</span>
+
+                </div>
+
+
+                <div class="menu-item" onclick="openPage('product-list-admin.html')">
+
+                    <div class="menu-icon purple">▤</div>
+
+                    <h3>Product List</h3>
+
+                    <p>View and manage products</p>
+
+                    <span class="menu-arrow">→</span>
+
+                </div>
+
+
+                <div class="menu-item" onclick="openPage('stock-view.html')">
+
+                    <div class="menu-icon orange">▦</div>
+
+                    <h3>Stock View</h3>
+
+                    <p>Check available stock</p>
+
+                    <span class="menu-arrow">→</span>
+
+                </div>
+
+
+                <div class="menu-item" onclick="openPage('orderlist.html')">
+
+                    <div class="menu-icon green">☷</div>
+
+                    <h3>Order List</h3>
+
+                    <p>Manage customer orders</p>
+
+                    <span class="menu-arrow">→</span>
+
+                </div>
+
+            </section>
+
+
+            <!-- LOGOUT -->
+
+            <section class="logout-section">
+
+                <button type="button" onclick="logout()">
+                    Logout
+                </button>
+
+            </section>
+
+        </main>
+
+
+        <!-- FOOTER -->
+
+        <footer class="admin-footer">
+            Powered by AshmerX Infotech
+        </footer>
+
+    </div>
+
+    <script src="/Admin/settings.js"></script>
+
+</body>
+<script>
+    function openPage(page) {
+        window.location.href = page;
+    }
+
+
+
+
+
+    
+</script>
+
+</html>

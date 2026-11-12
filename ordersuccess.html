@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Order Successful - RefurbTech</title>
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="ordersuccess.css">
+
+</head>
+
+<body>
+
+<div class="success-page">
+
+    <!-- HEADER -->
+
+    <header class="success-header">
+
+        <div class="brand">
+            REFURB<span>TECH</span>
+        </div>
+
+        <div class="secure">
+            <i class="fa-solid fa-shield-halved"></i>
+            Secure Order
+        </div>
+
+    </header>
+
+
+    <main id="successContent" style="display:none;">
+
+        <!-- SUCCESS MESSAGE -->
+
+        <section class="success-card">
+
+            <div class="success-icon">
+                <i class="fa-solid fa-check"></i>
+            </div>
+
+            <h1>Order Placed Successfully!</h1>
+
+            <p>
+                Thank you for choosing RefurbTech.
+                Your order enquiry has been received successfully.
+            </p>
+
+            <div class="order-id-box">
+
+                <span>YOUR ORDER ID</span>
+
+                <strong id="orderId">-</strong>
+
+            </div>
+
+            <div class="status">
+
+                <i class="fa-solid fa-clock"></i>
+
+                <span id="orderStatus">Pending</span>
+
+            </div>
+
+        </section>
+
+
+        <!-- ORDER SUMMARY -->
+
+        <section class="details-card">
+
+            <h2 class="section-title">
+                Order Summary
+            </h2>
+
+            <div id="productList"></div>
+
+            <div class="order-divider"></div>
+
+            <div class="summary-row">
+
+                <span>Subtotal</span>
+
+                <strong id="subtotal">₹0</strong>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>Discount</span>
+
+                <strong id="discount">₹0</strong>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>Delivery</span>
+
+                <strong>FREE</strong>
+
+            </div>
+
+            <div class="total-row">
+
+                <span>Total Amount</span>
+
+                <strong id="total">₹0</strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- CUSTOMER DETAILS -->
+
+        <section class="customer-card">
+
+            <h2 class="section-title">
+                Customer Details
+            </h2>
+
+            <div class="customer-info" id="customerDetails"></div>
+
+        </section>
+
+
+        <!-- ACTION BUTTONS -->
+
+        <div class="action-buttons">
+
+            <button class="shop-btn" onclick="continueShopping()">
+
+                <i class="fa-solid fa-bag-shopping"></i>
+
+                Continue Shopping
+
+            </button>
+
+            <button class="print-btn" onclick="window.print()">
+
+                <i class="fa-solid fa-print"></i>
+
+                Print Order Details
+
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <!-- EMPTY ORDER -->
+
+    <section class="success-card empty-message"
+        id="noOrder"
+        style="display:none;">
+
+        <div class="success-icon">
+            <i class="fa-solid fa-receipt"></i>
+        </div>
+
+        <h1>Order Details Not Found</h1>
+
+        <p>
+            We couldn't find your recent order details.
+            Please visit our store to continue shopping.
+        </p>
+
+        <button class="shop-btn" onclick="continueShopping()">
+            Continue Shopping
+        </button>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        © 2026 RefurbTech. All Rights Reserved.
+
+        <br>
+
+        Thank you for shopping with us.
+
+    </footer>
+
+</div>
+
+
+<script src="ordersuccess.js"></script>
+
+</body>
+</html>

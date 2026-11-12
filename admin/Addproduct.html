@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Product - RefurbTech</title>
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="Addproduct.css">
+</head>
+
+<body>
+
+    <div class="admin-container">
+
+        <!-- HEADER -->
+
+        <header class="page-header">
+
+            <div class="header-left">
+                <a href="settings.html" class="back-btn">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+
+                <div>
+                    <h1>Add New Product</h1>
+                    <p>Add a product to your RefurbTech store</p>
+                </div>
+            </div>
+
+            <span class="admin-label">
+                <i class="fa-solid fa-shield-halved"></i>
+                ADMIN
+            </span>
+
+        </header>
+
+
+        <form id="productForm">
+
+            <!-- BASIC DETAILS -->
+
+            <section class="form-section">
+
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fa-solid fa-box"></i>
+                    </div>
+
+                    <div>
+                        <h2>Basic Information</h2>
+                        <p>Enter the main product details</p>
+                    </div>
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group full">
+                        <label>Product Name *</label>
+                        <input type="text"
+                            id="productName"
+                            placeholder="e.g. Dell Latitude 7420"
+                            required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Product Category *</label>
+
+                        <select id="category" required>
+                            <option value="">Select Category</option>
+                            <option value="LAPTOP">Laptop</option>
+                            <option value="DESKTOP">Desktop</option>
+                            <option value="ACCESSORY">Accessories</option>
+                            <option value="STORAGE">Storage</option>
+                            <option value="RAM">RAM</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Product Badge</label>
+
+                        <select id="badge">
+                            <option value="">No Badge</option>
+                            <option value="BEST SELLER">Best Seller</option>
+                            <option value="SALE">Sale</option>
+                            <option value="DEAL">Deal</option>
+                            <option value="NEW">New</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Product Icon *</label>
+
+                        <select id="icon" required>
+                            <option value="fa-laptop">Laptop</option>
+                            <option value="fa-desktop">Desktop</option>
+                            <option value="fa-keyboard">Keyboard</option>
+                            <option value="fa-computer-mouse">Mouse</option>
+                            <option value="fa-headphones">Headphones</option>
+                            <option value="fa-hard-drive">Storage</option>
+                            <option value="fa-memory">RAM</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Short Specification *</label>
+                        <input type="text"
+                            id="shortSpec"
+                            placeholder="i7 • 16GB • 512GB SSD"
+                            required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Rating</label>
+                        <input type="number"
+                            id="rating"
+                            value="5"
+                            min="0"
+                            max="5"
+                            step="0.1">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Review Count</label>
+                        <input type="number"
+                            id="reviews"
+                            value="0"
+                            min="0">
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- PRICE AND STOCK -->
+
+            <section class="form-section">
+
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
+                    </div>
+
+                    <div>
+                        <h2>Price & Stock</h2>
+                        <p>Set selling price and available quantity</p>
+                    </div>
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Selling Price (₹) *</label>
+                        <input type="number"
+                            id="price"
+                            placeholder="34000"
+                            min="0"
+                            required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Old Price (₹)</label>
+                        <input type="number"
+                            id="oldPrice"
+                            placeholder="52000"
+                            min="0">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Available Quantity *</label>
+                        <input type="number"
+                            id="available"
+                            placeholder="5"
+                            min="0"
+                            required>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- SPECIFICATIONS -->
+
+            <section class="form-section">
+
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+
+                    <div>
+                        <h2>Product Specifications</h2>
+                        <p>Enter detailed product information</p>
+                    </div>
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group full">
+                        <label>Processor</label>
+                        <input type="text" id="processor"
+                            placeholder="Intel Core i7-1185G7">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>RAM</label>
+                        <input type="text" id="ram"
+                            placeholder="16 GB DDR4">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Storage</label>
+                        <input type="text" id="storage"
+                            placeholder="512 GB NVMe SSD">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Battery Health</label>
+                        <input type="text" id="batteryHealth"
+                            placeholder="92%">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Condition</label>
+                        <select id="condition">
+                            <option value="">Select Condition</option>
+                            <option value="New">New</option>
+                            <option value="Excellent">Excellent</option>
+                            <option value="Very Good">Very Good</option>
+                            <option value="Good">Good</option>
+                            <option value="Fair">Fair</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Display</label>
+                        <input type="text" id="display"
+                            placeholder='14" Full HD IPS'>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Graphics</label>
+                        <input type="text" id="graphics"
+                            placeholder="Intel Iris Xe">
+                    </div>
+
+
+                    <div class="form-group full">
+                        <label>Ports</label>
+                        <input type="text" id="ports"
+                            placeholder="USB-A, USB-C, HDMI, Audio">
+                    </div>
+
+
+                    <div class="form-group full">
+                        <label>Sensors</label>
+                        <input type="text" id="sensors"
+                            placeholder="Fingerprint, Camera, Light Sensor">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Operating System</label>
+                        <input type="text" id="os"
+                            placeholder="Windows 11 Pro">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Battery Backup</label>
+                        <input type="text" id="backup"
+                            placeholder="4 - 5 Hours">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Warranty</label>
+                        <input type="text" id="warranty"
+                            placeholder="6 Months">
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- PRODUCT PHOTOS -->
+
+            <section class="form-section">
+
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fa-solid fa-images"></i>
+                    </div>
+
+                    <div>
+                        <h2>Product Photos</h2>
+                        <p>Upload product images for your store</p>
+                    </div>
+                </div>
+
+
+                <div class="upload-area">
+
+                    <div class="upload-icon">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                    </div>
+
+                    <h3>Upload Product Images</h3>
+
+                    <p>
+                        Select up to 5 images from your device
+                    </p>
+
+                    <label for="productImages" class="upload-btn">
+                        <i class="fa-solid fa-plus"></i>
+                        Choose Photos
+                    </label>
+
+                    <input
+                        type="file"
+                        id="productImages"
+                        accept="image/*"
+                        multiple
+                        hidden>
+
+                    <small>
+                        JPG, PNG, WEBP • Maximum 5 Photos
+                    </small>
+
+                </div>
+
+
+                <div class="photo-preview" id="photoPreview">
+
+                    <div class="empty-photo">
+                        <i class="fa-regular fa-image"></i>
+                        <span>No photos selected</span>
+                    </div>
+
+                </div>
+
+                <p class="photo-note">
+                    <i class="fa-solid fa-circle-info"></i>
+                    The first photo will be the main product image.
+                    Other photos will appear in the Details Gallery.
+                </p>
+
+            </section>
+
+
+            <!-- ACTIONS -->
+
+            <div class="form-actions">
+
+                <button type="reset" class="reset-btn">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    Reset
+                </button>
+
+                <button type="submit" class="save-btn">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    Save Product
+                </button>
+
+            </div>
+
+        </form>
+
+
+        <footer class="page-footer">
+            Powered by <strong>AshmerX Infotech</strong>
+        </footer>
+
+    </div>
+
+</body>
+
+
+
+
+
+
+
+
+
+
+    <script>
+
+
+// ==================================
+// PRODUCT IMAGE PREVIEW
+// ==================================
+
+const productImagesInput = document.getElementById("productImages");
+const photoPreview = document.getElementById("photoPreview");
+
+let selectedImages = [];
+
+productImagesInput.addEventListener("change", function () {
+
+    const newImages = Array.from(this.files);
+
+    if (selectedImages.length + newImages.length > 5) {
+        alert("Maximum 5 photos only allowed!");
+        this.value = "";
+        return;
+    }
+
+    for (const file of newImages) {
+
+        if (!file.type.startsWith("image/")) {
+            alert("Please select image files only!");
+            continue;
+        }
+
+        if (file.size > 5 * 1024 * 1024) {
+            alert(file.name + " exceeds 5MB!");
+            continue;
+        }
+
+        selectedImages.push(file);
+    }
+
+    this.value = "";
+
+    displayImagePreview();
+
+});
+
+
+// ==================================
+// DISPLAY IMAGE PREVIEW
+// ==================================
+
+function displayImagePreview() {
+
+    photoPreview.innerHTML = "";
+
+    selectedImages.forEach((file, index) => {
+
+        const reader = new FileReader();
+
+        reader.onload = function (event) {
+
+            const imageBox = document.createElement("div");
+
+            imageBox.className = "preview-item";
+
+            imageBox.innerHTML = `
+                <img src="${event.target.result}" alt="Product Image">
+
+                <button type="button"
+                    class="remove-image"
+                    data-index="${index}">
+                    &times;
+                </button>
+
+                ${index === 0 ? '<small>Main Image</small>' : ''}
+            `;
+
+            photoPreview.appendChild(imageBox);
+
+        };
+
+        reader.readAsDataURL(file);
+
+    });
+
+}
+
+
+// ==================================
+// REMOVE SELECTED IMAGE
+// ==================================
+
+photoPreview.addEventListener("click", function (event) {
+
+    if (event.target.classList.contains("remove-image")) {
+
+        const index = Number(event.target.dataset.index);
+
+        selectedImages.splice(index, 1);
+
+        displayImagePreview();
+
+    }
+
+});
+
+
+
+
+
+
+
+ // ==================================
+// ADD PRODUCT FORM SUBMIT
+// ==================================
+
+const productForm = document.getElementById("productForm");
+
+productForm.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const saveBtn = productForm.querySelector(".save-btn");
+
+    const productData = {
+
+        name: document.getElementById("productName").value.trim(),
+        category: document.getElementById("category").value,
+        badge: document.getElementById("badge").value,
+        icon: document.getElementById("icon").value,
+        shortSpec: document.getElementById("shortSpec").value.trim(),
+        rating: document.getElementById("rating").value,
+        reviews: document.getElementById("reviews").value,
+        price: document.getElementById("price").value,
+        oldPrice: document.getElementById("oldPrice").value,
+        available: document.getElementById("available").value,
+        processor: document.getElementById("processor").value.trim(),
+        ram: document.getElementById("ram").value.trim(),
+        storage: document.getElementById("storage").value.trim(),
+        batteryHealth: document.getElementById("batteryHealth").value.trim(),
+        condition: document.getElementById("condition").value,
+        display: document.getElementById("display").value.trim(),
+        graphics: document.getElementById("graphics").value.trim(),
+        ports: document.getElementById("ports").value.trim(),
+        sensors: document.getElementById("sensors").value.trim(),
+        os: document.getElementById("os").value.trim(),
+        backup: document.getElementById("backup").value.trim(),
+        warranty: document.getElementById("warranty").value.trim()
+
+    };
+
+    try {
+
+        saveBtn.disabled = true;
+        saveBtn.innerHTML = "Saving Product...";
+
+        // STEP 1: SAVE PRODUCT
+
+        const response = await fetch("/api/products", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify(productData)
+
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+            throw new Error(result.message || "Product Save Failed");
+        }
+
+        const productId = result.product.productId;
+
+        console.log("Product Saved:", productId);
+
+
+        // STEP 2: UPLOAD PRODUCT IMAGES
+
+        if (selectedImages.length > 0) {
+
+            saveBtn.innerHTML = "Uploading Images...";
+
+            const formData = new FormData();
+
+            selectedImages.forEach(image => {
+                formData.append("images", image);
+            });
+
+            const imageResponse = await fetch(
+                `/api/products/${encodeURIComponent(productId)}/images`,
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
+
+            const imageResult = await imageResponse.json();
+
+            if (!imageResponse.ok || !imageResult.success) {
+                throw new Error(
+                    "Product saved, but image upload failed: " +
+                    (imageResult.message || "Unknown error")
+                );
+            }
+
+            console.log("Uploaded Images:", imageResult.images);
+
+        }
+
+        alert("Product and Images Saved Successfully!");
+
+        productForm.reset();
+
+        selectedImages = [];
+        displayImagePreview();
+
+    } catch(error) {
+
+        console.error("Product Save Error:", error);
+
+        alert(error.message || "Unable to save product");
+
+    } finally {
+
+        saveBtn.disabled = false;
+
+        saveBtn.innerHTML =
+            '<i class="fa-solid fa-floppy-disk"></i> Save Product';
+
+    }
+
+});
+    </script>
+
+</html>

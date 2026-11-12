@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>All Products | AshmerX Infotech</title>
+
+    <link rel="stylesheet" href="Allproduct.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- HEADER -->
+        <header class="top-header">
+
+            <button class="back-btn" onclick="window.location.href='index.html'">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+
+            <div class="header-title">
+                <h2>Our Products</h2>
+                <p>AshmerX Infotech</p>
+            </div>
+
+            <button class="header-cart" onclick="window.location.href='cart.html'">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span id="cartCount">0</span>
+            </button>
+
+        </header>
+
+
+        <!-- SEARCH -->
+        <section class="search-section">
+
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="productSearch"
+                    placeholder="Search laptops, desktops, accessories..."
+                    autocomplete="off"
+                >
+
+                <button id="clearSearch" type="button">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+        </section>
+
+
+        <!-- CATEGORY FILTER -->
+        <section class="category-section">
+
+            <div class="category-list" id="categoryList">
+
+                <button class="category-item active" data-category="ALL">
+                    <i class="fa-solid fa-border-all"></i>
+                    <span>All</span>
+                </button>
+
+                <button class="category-item" data-category="LAPTOP">
+                    <i class="fa-solid fa-laptop"></i>
+                    <span>Laptops</span>
+                </button>
+
+                <button class="category-item" data-category="DESKTOP">
+                    <i class="fa-solid fa-computer"></i>
+                    <span>Desktops</span>
+                </button>
+
+                <button class="category-item" data-category="ACCESSORY">
+                    <i class="fa-solid fa-keyboard"></i>
+                    <span>Accessories</span>
+                </button>
+
+                <button class="category-item" data-category="STORAGE">
+                    <i class="fa-solid fa-hard-drive"></i>
+                    <span>Storage</span>
+                </button>
+
+                <button class="category-item" data-category="RAM">
+                    <i class="fa-solid fa-memory"></i>
+                    <span>RAM</span>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- PRODUCTS HEADING -->
+        <section class="products-heading">
+
+            <div>
+                <h2 id="categoryTitle">All Products</h2>
+                <p><span id="productCount">0</span> products available</p>
+            </div>
+
+            <div class="sort-box">
+                <i class="fa-solid fa-arrow-down-wide-short"></i>
+
+                <select id="sortProducts">
+                    <option value="latest">Latest</option>
+                    <option value="low-high">Price: Low to High</option>
+                    <option value="high-low">Price: High to Low</option>
+                </select>
+            </div>
+
+        </section>
+
+
+        <!-- PRODUCT LIST -->
+        <main class="products-section">
+
+            <div class="product-grid" id="productGrid">
+
+                <div class="loading-state">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    <p>Loading Products...</p>
+                </div>
+
+            </div>
+
+        </main>
+
+
+        <!-- BOTTOM NAVIGATION -->
+        <nav class="bottom-navigation">
+
+            <a href="index.html" class="nav-item">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </a>
+
+            <a href="all-products.html" class="nav-item active">
+                <i class="fa-solid fa-store"></i>
+                <span>Products</span>
+            </a>
+
+            <a href="cart.html" class="nav-item">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>My Cart</span>
+                <small id="bottomCartCount">0</small>
+            </a>
+
+        </nav>
+
+    </div>
+
+    <script src="Allproduct.js">
+        
+    </script>
+
+</body>
+</html>
