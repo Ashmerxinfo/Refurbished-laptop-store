@@ -10,7 +10,7 @@ const Order = require("./models/Order");
 const Product = require("./models/product");
 const cloudinary = require("./Services/cloudinary");
 const crypto = require("crypto");
-const User = require("./models/user");
+const User = require("./models/User");
 const bcrypt = require("bcryptjs");
 
 
