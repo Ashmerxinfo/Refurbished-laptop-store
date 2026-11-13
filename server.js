@@ -10,6 +10,9 @@ const Order = require("./models/Order");
 const Product = require("./models/product");
 const cloudinary = require("./Services/cloudinary");
 const crypto = require("crypto");
+const User = require("./models/user");
+const bcrypt = require("bcryptjs");
+
 
 const app = express();
 
@@ -40,7 +43,14 @@ app.use(session({
 }));
 
 
+function isAdminAuthenticated(req) {
 
+    return (
+        req.session.masterAdmin === true ||
+        Boolean(req.session.user && req.session.user.id)
+    );
+
+}
 
 
 
@@ -84,28 +94,376 @@ cloudinary.api.ping()
 // MASTER ADMIN LOGIN
 // ===============================
 
-app.post("/api/admin/master-login", (req, res) => {
+    app.post("/api/admin/master-login", async (req, res) => {
 
-    const { email, password } = req.body;
+    try {
 
-    if (
-        email !== process.env.MASTER_ADMIN_EMAIL ||
-        password !== process.env.MASTER_ADMIN_PASSWORD
-    ) {
-        return res.status(401).json({
-            success: false,
-            message: "Invalid Email or Password"
+        // Existing login form field
+
+        const identifier =
+            (req.body.email || req.body.username || "").trim();
+
+        const { password } = req.body;
+
+        if (!identifier || !password) {
+            return res.status(400).json({
+                success: false,
+                message: "Username and password required"
+            });
+        }
+
+        // =================================
+        // 1. CHECK MASTER ADMIN (.env)
+        // =================================
+
+        if (
+            identifier.toLowerCase() ===
+                (process.env.MASTER_ADMIN_EMAIL || "").toLowerCase() &&
+            password === process.env.MASTER_ADMIN_PASSWORD
+        ) {
+
+            return req.session.regenerate((error) => {
+
+                if (error) {
+                    return res.status(500).json({
+                        success: false,
+                        message: "Session creation failed"
+                    });
+                }
+
+                req.session.masterAdmin = true;
+
+                req.session.save((saveError) => {
+
+                    if (saveError) {
+                        return res.status(500).json({
+                            success: false,
+                            message: "Session save failed"
+                        });
+                    }
+
+                    res.json({
+                        success: true,
+                        loginType: "master",
+                        message: "Master Admin Login Successful"
+                    });
+
+                });
+
+            });
+
+        }
+
+        // =================================
+        // 2. CHECK DATABASE USER
+        // =================================
+
+        const user = await User.findOne({
+            username: identifier.toLowerCase()
         });
+
+        if (!user || !user.isActive) {
+            return res.status(401).json({
+                success: false,
+                message: "Invalid Username or Password"
+            });
+        }
+
+        const passwordMatch = await bcrypt.compare(
+            password,
+            user.passwordHash
+        );
+
+        if (!passwordMatch) {
+            return res.status(401).json({
+                success: false,
+                message: "Invalid Username or Password"
+            });
+        }
+
+        // =================================
+        // 3. CREATE USER SESSION
+        // =================================
+
+        req.session.regenerate((error) => {
+
+            if (error) {
+                return res.status(500).json({
+                    success: false,
+                    message: "Session creation failed"
+                });
+            }
+
+            req.session.user = {
+                id: user._id.toString(),
+                username: user.username,
+                name: user.name
+            };
+
+            req.session.save((saveError) => {
+
+                if (saveError) {
+                    return res.status(500).json({
+                        success: false,
+                        message: "Session save failed"
+                    });
+                }
+
+                res.json({
+                    success: true,
+                    loginType: "user",
+                    message: "User Login Successful"
+                });
+
+            });
+
+        });
+
+    } catch (error) {
+
+        console.error("Login Error:", error);
+
+        res.status(500).json({
+            success: false,
+            message: "Login failed"
+        });
+
     }
 
-    req.session.masterAdmin = true;
+});
 
-    res.json({
-        success: true,
-        message: "Master Admin Login Successful"
-    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.post("/api/user/login", async (req, res) => {
+
+    try {
+
+        const { username, password } = req.body;
+
+        if (!username || !password) {
+            return res.status(400).json({
+                success: false,
+                message: "Username and password required"
+            });
+        }
+
+        const user = await User.findOne({
+            username: username.trim().toLowerCase()
+        });
+
+        if (!user || !user.isActive) {
+            return res.status(401).json({
+                success: false,
+                message: "Invalid username or password"
+            });
+        }
+
+        const isMatch = await bcrypt.compare(
+            password,
+            user.passwordHash
+        );
+
+        if (!isMatch) {
+            return res.status(401).json({
+                success: false,
+                message: "Invalid username or password"
+            });
+        }
+
+        // Create a fresh session after successful login
+        req.session.regenerate((error) => {
+
+            if (error) {
+                console.error("Session Error:", error);
+
+                return res.status(500).json({
+                    success: false,
+                    message: "Unable to create login session"
+                });
+            }
+
+            req.session.user = {
+                id: user._id.toString(),
+                username: user.username,
+                name: user.name
+            };
+
+            req.session.save((saveError) => {
+
+                if (saveError) {
+                    return res.status(500).json({
+                        success: false,
+                        message: "Unable to save login session"
+                    });
+                }
+
+                res.json({
+                    success: true,
+                    message: "Login successful"
+                });
+
+            });
+
+        });
+
+    } catch (error) {
+
+        console.error("User Login Error:", error);
+
+        res.status(500).json({
+            success: false,
+            message: "Login failed"
+        });
+
+    }
 
 });
+
+
+
+
+
+app.post("/api/admin/users", async (req, res) => {
+
+    try {
+
+        // ONLY MASTER ADMIN CAN CREATE USERS
+        if (req.session.masterAdmin !== true) {
+            return res.status(403).json({
+                success: false,
+                message: "Master Admin access required"
+            });
+        }
+
+        const { username, name, password } = req.body;
+
+        if (!username || !name || !password) {
+            return res.status(400).json({
+                success: false,
+                message: "All fields are required"
+            });
+        }
+
+        const cleanUsername = username.trim().toLowerCase();
+
+        if (!/^[a-z0-9._-]{3,30}$/.test(cleanUsername)) {
+            return res.status(400).json({
+                success: false,
+                message: "Username must be 3-30 characters"
+            });
+        }
+
+        if (password.length < 8) {
+            return res.status(400).json({
+                success: false,
+                message: "Password must contain at least 8 characters"
+            });
+        }
+
+        const existingUser = await User.findOne({
+            username: cleanUsername
+        });
+
+        if (existingUser) {
+            return res.status(409).json({
+                success: false,
+                message: "Username already exists"
+            });
+        }
+
+        const passwordHash = await bcrypt.hash(password, 12);
+
+        const newUser = new User({
+            username: cleanUsername,
+            name: name.trim(),
+            passwordHash
+        });
+
+        await newUser.save();
+
+        res.status(201).json({
+            success: true,
+            message: "User created successfully",
+            user: {
+                id: newUser._id,
+                username: newUser.username,
+                name: newUser.name,
+                isActive: newUser.isActive
+            }
+        });
+
+    } catch (error) {
+
+ 
+
+    console.error("Create User Error:", error);
+
+    res.status(500).json({
+
+        success: false,
+
+        message: "Unable to create user",
+
+        error: process.env.NODE_ENV === "production"
+            ? undefined
+            : error.message
+
+    });
+
+}
+
+});
+
+
+
+
+
+app.get("/api/admin/users", async (req, res) => {
+
+    try {
+
+        if (req.session.masterAdmin !== true) {
+            return res.status(403).json({
+                success: false,
+                message: "Master Admin access required"
+            });
+        }
+
+        const users = await User.find({})
+            .select("-passwordHash")
+            .sort({ createdAt: -1 })
+            .lean();
+
+        res.json({
+            success: true,
+            count: users.length,
+            users
+        });
+
+    } catch (error) {
+
+        console.error("Get Users Error:", error);
+
+        res.status(500).json({
+            success: false,
+            message: "Unable to fetch users"
+        });
+
+    }
+
+});
+
 
 
 
@@ -118,7 +476,7 @@ app.post("/api/admin/master-login", (req, res) => {
 
 app.get("/", (req, res) => {
 
-    res.sendFile(path.join(__dirname, "index.html"))
+    res.sendFile(path.join(__dirname, "Welcome.html"))
        
     
 
@@ -359,7 +717,7 @@ app.get("/api/admin/orders/pending", async (req, res) => {
 
     try {
 
-        if (!req.session.masterAdmin) {
+        if (!isAdminAuthenticated(req))  {
             return res.status(401).json({
                 success: false,
                 message: "Unauthorized access"
@@ -402,7 +760,7 @@ app.patch("/api/admin/orders/:orderId/complete", async (req, res) => {
 
     try {
 
-        if (!req.session.masterAdmin) {
+        if (!isAdminAuthenticated(req)) {
             return res.status(401).json({
                 success: false,
                 message: "Unauthorized access"
@@ -547,7 +905,7 @@ app.delete("/api/admin/orders/:orderId", async (req, res) => {
 
     try {
 
-        if (!req.session.masterAdmin) {
+        if (!isAdminAuthenticated(req)) {
             return res.status(401).json({
                 success: false,
                 message: "Unauthorized access"
@@ -611,7 +969,7 @@ app.get(
     ["/admin-settings", "/admin-settings.html"],
     (req, res) => {
 
-        if (!req.session.masterAdmin) {
+        if (!isAdminAuthenticated(req)) {
             return res.redirect("/admin-login.html");
         }
 
@@ -993,7 +1351,7 @@ app.get("/api/admin/products", async (req, res) => {
     try {
 
         // ADMIN AUTHENTICATION
-        if (!req.session.masterAdmin) {
+        if (!isAdminAuthenticated(req)) {
             return res.status(401).json({
                 success: false,
                 message: "Unauthorized access"
@@ -1045,7 +1403,7 @@ app.get("/api/admin/stock", async (req, res) => {
 
     try {
 
-        if (!req.session.masterAdmin) {
+        if (!isAdminAuthenticated(req)) {
             return res.status(401).json({
                 success: false,
                 message: "Unauthorized access"
@@ -1086,6 +1444,37 @@ app.get("/api/admin/stock", async (req, res) => {
 });
 
 
+
+
+
+app.get("/api/admin/current-user", (req, res) => {
+
+    if (req.session.masterAdmin) {
+
+        return res.json({
+            success: true,
+            name: "Master Admin",
+            username: process.env.MASTER_ADMIN_EMAIL
+        });
+
+    }
+
+    if (req.session.user) {
+
+        return res.json({
+            success: true,
+            name: req.session.user.name,
+            username: req.session.user.username
+        });
+
+    }
+
+    return res.status(401).json({
+        success: false,
+        message: "Unauthorized"
+    });
+
+});
 
 
 

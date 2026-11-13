@@ -73,6 +73,27 @@ body {
     font-weight: bold;
 }
 
+
+/* PROFILE DETAILS */
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.profile-details h4 {
+    font-size: 12px;
+    font-weight: 700;
+    color: #172554;
+    margin: 0;
+}
+
+.profile-details span {
+    font-size: 10px;
+    font-weight: 500;
+    color: #8993a4;
+}
 /* MAIN */
 
 .admin-container {

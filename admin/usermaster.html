@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>User Management | RefurbTech</title>
+
+    <link rel="stylesheet" href="usermaster.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <header class="page-header">
+        <div>
+            <span class="header-tag">ADMIN SETTINGS</span>
+            <h1><i class="fa-solid fa-users-gear"></i> User Management</h1>
+            <p>Create and manage admin users</p>
+        </div>
+
+        <a href="settings.html" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i> Back
+        </a>
+    </header>
+
+    <main class="content-grid">
+
+        <!-- CREATE USER -->
+
+        <section class="create-card">
+
+            <div class="card-heading">
+                <div class="heading-icon">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+
+                <div>
+                    <h2>Create New User</h2>
+                    <p>Add a new admin login account</p>
+                </div>
+            </div>
+
+            <form id="createUserForm">
+
+                <label for="userName">Full Name</label>
+                <input
+                    type="text"
+                    id="userName"
+                    placeholder="Enter full name"
+                    required
+                >
+
+                <label for="username">Username</label>
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Example: staff01"
+                    minlength="3"
+                    maxlength="30"
+                    required
+                >
+
+                <label for="password">Password</label>
+
+                <div class="password-box">
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Minimum 8 characters"
+                        minlength="8"
+                        required
+                    >
+
+                    <button type="button" id="togglePassword">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                </div>
+
+                <button type="submit" id="createBtn" class="create-btn">
+                    <i class="fa-solid fa-user-plus"></i>
+                    Create User
+                </button>
+
+                <div id="formMessage" class="form-message"></div>
+
+            </form>
+
+        </section>
+
+
+        <!-- USER LIST -->
+
+        <section class="users-card">
+
+            <div class="users-heading">
+                <div>
+                    <h2>Created Users</h2>
+                    <p>All registered admin accounts</p>
+                </div>
+
+                <button type="button" id="refreshBtn" class="refresh-btn">
+                    <i class="fa-solid fa-rotate"></i>
+                </button>
+            </div>
+
+            <div class="user-count">
+                <span>Total Users</span>
+                <strong id="totalUsers">0</strong>
+            </div>
+
+            <div class="table-wrapper">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Username</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="usersTable">
+                        <tr>
+                            <td colspan="3" class="empty-message">
+                                Loading users...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        REFURBTECH ADMIN PANEL
+    </footer>
+
+</div>
+
+<script>
+
+
+    const form = document.getElementById("createUserForm");
+const createBtn = document.getElementById("createBtn");
+const formMessage = document.getElementById("formMessage");
+const usersTable = document.getElementById("usersTable");
+
+
+// =================================
+// SHOW / HIDE PASSWORD
+// =================================
+
+document.getElementById("togglePassword").addEventListener("click", () => {
+
+    const password = document.getElementById("password");
+    const icon = document.querySelector("#togglePassword i");
+
+    if (password.type === "password") {
+        password.type = "text";
+        icon.classList.replace("fa-eye", "fa-eye-slash");
+    } else {
+        password.type = "password";
+        icon.classList.replace("fa-eye-slash", "fa-eye");
+    }
+
+});
+
+
+// =================================
+// CREATE USER
+// =================================
+
+form.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    const name = document.getElementById("userName").value.trim();
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value;
+
+    createBtn.disabled = true;
+    createBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Creating...';
+
+    formMessage.textContent = "";
+    formMessage.className = "form-message";
+
+    try {
+
+        const response = await fetch("/api/admin/users", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            credentials: "same-origin",
+
+            body: JSON.stringify({
+                name,
+                username,
+                password
+            })
+
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.message || "Unable to create user");
+        }
+
+        formMessage.textContent = "User created successfully!";
+        formMessage.classList.add("success");
+
+        form.reset();
+
+        await loadUsers();
+
+    } catch (error) {
+
+        formMessage.textContent = error.message;
+        formMessage.classList.add("error");
+
+    } finally {
+
+        createBtn.disabled = false;
+        createBtn.innerHTML = '<i class="fa-solid fa-user-plus"></i> Create User';
+
+    }
+
+});
+
+
+// =================================
+// LOAD USERS
+// =================================
+
+async function loadUsers() {
+
+    usersTable.innerHTML = `
+        <tr>
+            <td colspan="3" class="empty-message">
+                Loading users...
+            </td>
+        </tr>
+    `;
+
+    try {
+
+        const response = await fetch("/api/admin/users", {
+            credentials: "same-origin"
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.message || "Unable to load users");
+        }
+
+        document.getElementById("totalUsers").textContent =
+            result.count;
+
+        if (!result.users || result.users.length === 0) {
+
+            usersTable.innerHTML = `
+                <tr>
+                    <td colspan="3" class="empty-message">
+                        No users created yet
+                    </td>
+                </tr>
+            `;
+
+            return;
+        }
+
+        usersTable.innerHTML = "";
+
+        result.users.forEach(user => {
+
+            const row = document.createElement("tr");
+
+            const nameCell = document.createElement("td");
+            nameCell.textContent = user.name;
+
+            const usernameCell = document.createElement("td");
+            usernameCell.textContent = user.username;
+
+            const statusCell = document.createElement("td");
+
+            const status = document.createElement("span");
+
+            status.textContent = user.isActive ? "Active" : "Inactive";
+            status.className = user.isActive
+                ? "status-active"
+                : "status-inactive";
+
+            statusCell.appendChild(status);
+
+            row.append(nameCell, usernameCell, statusCell);
+
+            usersTable.appendChild(row);
+
+        });
+
+    } catch (error) {
+
+        usersTable.innerHTML = `
+            <tr>
+                <td colspan="3" class="empty-message">
+                    ${error.message}
+                </td>
+            </tr>
+        `;
+
+    }
+
+}
+
+
+// =================================
+// REFRESH USERS
+// =================================
+
+document.getElementById("refreshBtn").addEventListener("click", loadUsers);
+
+
+// INITIAL LOAD
+loadUsers();
+
+</script>
+
+</body>
+</html>

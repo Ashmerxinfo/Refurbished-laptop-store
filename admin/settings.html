@@ -7,6 +7,8 @@
     <title>Admin Settings | RefurbTech</title>
 
     <link rel="stylesheet" href="/admin/settings.css">
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
@@ -23,10 +25,17 @@
             </div>
 
             <div class="admin-profile">
-                <div class="profile-icon">A</div>
-                <span>Master Admin</span>
-            </div>
 
+    <div class="profile-icon">
+        <i class="fa-solid fa-user"></i>
+    </div>
+
+    <div class="profile-details">
+        <h4 id="adminDisplayName">Loading...</h4>
+        <span id="adminUsername"></span>
+    </div>
+
+</div>
         </header>
 
 
@@ -46,7 +55,7 @@
 
                 <div class="menu-item" onclick="openPage('Addproduct.html')">
 
-                    <div class="menu-icon blue">＋</div>
+                    <div class="menu-icon blue"><i class="fa-solid fa-plus"></i></div>
 
                     <h3>Add Product</h3>
 
@@ -59,7 +68,7 @@
 
                 <div class="menu-item" onclick="openPage('productlist.html')">
 
-                    <div class="menu-icon purple">▤</div>
+                    <div class="menu-icon purple"><i class="fa-solid fa-clipboard"></i></div>
 
                     <h3>Product List</h3>
 
@@ -72,7 +81,7 @@
 
                 <div class="menu-item" onclick="openPage('stock.html')">
 
-                    <div class="menu-icon orange">▦</div>
+                    <div class="menu-icon orange"><i class="fa-solid fa-book"></i></div>
 
                     <h3>Stock View</h3>
 
@@ -85,7 +94,7 @@
 
                 <div class="menu-item" onclick="openPage('orderlist.html')">
 
-                    <div class="menu-icon green">☷</div>
+                    <div class="menu-icon green"><i class="fa-solid fa-fax"></i></div>
 
                     <h3>Order List</h3>
 
@@ -95,9 +104,9 @@
 
                 </div>
 
-                <div class="menu-item" onclick="openPage('Usermaster.html')">
+                <div class="menu-item" onclick="openPage('usermaster.html')">
 
-                    <div class="menu-icon green" >▤</div>
+                    <div class="menu-icon green" ><i class="fa-solid fa-user"></i></div>
 
                     <h3>User Master</h3>
 
@@ -146,7 +155,35 @@
 
 
 
+async function loadAdminProfile() {
 
+    try {
+
+        const response = await fetch(
+            "/api/admin/current-user"
+        );
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.message);
+        }
+
+        document.getElementById("adminDisplayName").textContent =
+            result.name;
+
+        document.getElementById("adminUsername").textContent =
+            result.username;
+
+    } catch (error) {
+
+        console.error("Profile Load Error:", error);
+
+    }
+
+}
+
+loadAdminProfile();
     
 </script>
 

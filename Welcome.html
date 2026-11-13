@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Welcome | AshmerX Infotech</title>
+
+    <link rel="stylesheet" href="Welcome.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="welcome-screen">
+
+        <div class="glow glow-one"></div>
+        <div class="glow glow-two"></div>
+
+        <div class="welcome-content">
+
+            <div class="logo-icon">
+                <i class="fa-solid fa-microchip"></i>
+            </div>
+
+            <p class="welcome-label">WELCOME TO</p>
+
+            <h1>ASHMERX <span>INFOTECH</span></h1>
+
+            <div class="line"></div>
+
+            <h2>Your Digital Transformation Partner</h2>
+
+            <p class="welcome-description">
+                Innovation. Technology. Trust.
+            </p>
+
+            <div class="loading-area">
+                <div class="loading-bar">
+                    <div class="loading-progress"></div>
+                </div>
+                <p>Preparing your experience...</p>
+            </div>
+
+        </div>
+
+        <div class="welcome-footer">
+            POWERED BY ASHMERX INFOTECH
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+    // Welcome screen duration: 3 seconds
+
+    setTimeout(function () {
+
+        document.body.style.transition = "opacity 0.6s ease";
+        document.body.style.opacity = "0";
+
+        setTimeout(function () {
+
+            // Redirect to your main website
+            window.location.href = "index.html";
+
+        }, 600);
+
+    }, 3000);
+
+});
+    </script>
+
+</body>
+</html>
