@@ -125,6 +125,102 @@
 
 </div>
 
+
+<!-- STOCK CARD TEMPLATE
+     This template is for the upcoming JavaScript integration.
+-->
+
+<template id="stockCardTemplate">
+
+    <div class="stock-card">
+
+        <div class="stock-card-top">
+
+            <div>
+                <h4 class="stock-product-name">
+                    Product Name
+                </h4>
+
+                <p class="stock-product-id">
+                    ID: PRODUCT-ID
+                </p>
+            </div>
+
+            <span class="category-tag">
+                LAPTOP
+            </span>
+
+        </div>
+
+
+        <!-- QUANTITY CONTROLS -->
+
+        <div class="stock-quantity">
+
+            <div class="quantity-info">
+
+                <span>Available Quantity</span>
+
+                <strong class="current-stock">
+                    8 Units
+                </strong>
+
+            </div>
+
+
+            <div class="stock-edit-controls">
+
+                <button
+                    type="button"
+                    class="quantity-btn minus-btn"
+                    aria-label="Decrease stock">
+
+                    <i class="fa-solid fa-minus"></i>
+
+                </button>
+
+
+                <input
+                    type="number"
+                    class="quantity-input"
+                    value="0"
+                    min="0"
+                    aria-label="Stock adjustment quantity"
+                >
+
+
+                <button
+                    type="button"
+                    class="quantity-btn plus-btn"
+                    aria-label="Increase stock">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="save-stock-btn"
+                    disabled>
+
+                    <i class="fa-regular fa-floppy-disk"></i>
+                    Save
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</template>
+
+
+</body>
+
+
 <script>
 
                     
@@ -305,77 +401,263 @@
 
                 }
 
+// ==================================
+// DISPLAY STOCK
+// ==================================
 
-                // ==================================
-                // DISPLAY STOCK
-                // ==================================
+function displayStock() {
 
-                function displayStock() {
+    const products = getFilteredStock();
 
-                    const products = getFilteredStock();
+    stockCount.textContent = `${products.length} Items`;
 
-                    stockCount.textContent = `${products.length} Items`;
+    if (products.length === 0) {
 
-                    if (products.length === 0) {
+        stockList.innerHTML = `
+            <div class="empty-state">
+                No available stock found.
+            </div>
+        `;
 
-                        stockList.innerHTML = `
-                            <div class="empty-state">
-                                No available stock found.
-                            </div>
-                        `;
+        return;
+    }
 
-                        return;
+    stockList.innerHTML = products.map(product => {
 
-                    }
+        const quantity = Number(product.available) || 0;
 
+        return `
 
-                    stockList.innerHTML = products.map(product => {
+            <div class="stock-card">
 
-                        const quantity = Number(product.available) || 0;
+                <div class="stock-card-top">
 
-                        return `
+                    <div>
 
-                            <div class="stock-card">
+                        <div class="stock-product-name">
+                            ${escapeHTML(product.name)}
+                        </div>
 
-                                <div class="stock-card-top">
+                        <div class="stock-product-id">
+                            ID: ${escapeHTML(product.productId)}
+                        </div>
 
-                                    <div>
+                    </div>
 
-                                        <div class="stock-product-name">
-                                            ${escapeHTML(product.name)}
-                                        </div>
+                    <span class="category-tag">
+                        ${escapeHTML(product.category)}
+                    </span>
 
-                                        <div class="stock-product-id">
-                                            ID: ${escapeHTML(product.productId)}
-                                        </div>
-
-                                    </div>
-
-                                    <span class="category-tag">
-                                        ${escapeHTML(product.category)}
-                                    </span>
-
-                                </div>
+                </div>
 
 
-                                <div class="stock-quantity">
+                <div class="stock-quantity">
 
-                                    <span>Available Quantity</span>
+                    <div class="quantity-info">
 
-                                    <strong>
-                                        ${quantity} Units
-                                    </strong>
+                        <span>Available Quantity</span>
 
-                                </div>
+                        <strong class="current-stock">
+                            ${quantity} Units
+                        </strong>
 
-                            </div>
+                    </div>
 
-                        `;
 
-                    }).join("");
+                    <div class="stock-edit-controls">
 
+                        <button
+                            type="button"
+                            class="quantity-btn minus-btn"
+                            data-action="remove"
+                            aria-label="Remove stock">
+
+                            <i class="fa-solid fa-minus"></i>
+
+                        </button>
+
+
+                        <input
+                            type="number"
+                            class="quantity-input"
+                            value="0"
+                            min="0"
+                            max="999999"
+                            readonly
+                        >
+
+
+                        <button
+                            type="button"
+                            class="quantity-btn plus-btn"
+                            data-action="add"
+                            aria-label="Add stock">
+
+                            <i class="fa-solid fa-plus"></i>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="save-stock-btn"
+                            disabled>
+
+                            <i class="fa-regular fa-floppy-disk"></i>
+                            Save
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    }).join("");
+
+}
+
+
+// ==================================
+// STOCK ADJUSTMENT BUTTONS
+// ==================================
+
+stockList.addEventListener("click", async (event) => {
+
+    const button = event.target.closest(
+        ".quantity-btn, .save-stock-btn"
+    );
+
+    if (!button) return;
+
+    const card = button.closest(".stock-card");
+
+    if (!card) return;
+
+    const input = card.querySelector(".quantity-input");
+
+    const saveButton = card.querySelector(".save-stock-btn");
+
+    const currentStock = card.querySelector(".current-stock");
+
+    const productId = card.querySelector(
+        ".stock-product-id"
+    ).textContent.replace("ID:", "").trim();
+
+
+
+
+   // PLUS / MINUS
+
+    if (button.classList.contains("quantity-btn")) {
+
+        const action = button.dataset.action;
+
+        const currentValue = Number(input.value) || 0;
+
+        // Both buttons increase adjustment quantity
+        const nextValue = currentValue + 1;
+
+        if (nextValue > 999999) return;
+
+        input.value = nextValue;
+
+        // Select Add or Remove action
+        card.dataset.action = action;
+
+        // Highlight selected button
+        card.querySelectorAll(".quantity-btn").forEach(btn => {
+
+            btn.classList.toggle("active", btn === button);
+
+        });
+
+        // Enable Save
+        saveButton.disabled = false;
+
+        return;
+    }
+
+
+    // SAVE STOCK
+
+    if (button.classList.contains("save-stock-btn")) {
+
+        const quantity = Number(input.value);
+
+        const action = card.dataset.action;
+
+        if (
+            !Number.isSafeInteger(quantity) ||
+            quantity <= 0 ||
+            !["add", "remove"].includes(action)
+        ) {
+            return;
+        }
+
+        button.disabled = true;
+
+        button.innerHTML = `
+            <i class="fa-solid fa-spinner fa-spin"></i>
+        `;
+
+        try {
+
+            const response = await fetch(
+                "/api/admin/stock/adjust",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        productId,
+                        action,
+                        quantity
+                    })
                 }
+            );
 
+            if (response.status === 401) {
+                window.location.href = "/admin-login.html";
+                return;
+            }
+
+            const result = await response.json();
+
+            if (!response.ok || !result.success) {
+                throw new Error(
+                    result.message || "Stock update failed"
+                );
+            }
+
+            alert(result.message);
+
+            await loadStock();
+
+        } catch (error) {
+
+            console.error("Stock Update Error:", error);
+
+            alert(error.message || "Unable to update stock");
+
+            button.disabled = false;
+
+            button.innerHTML = `
+                <i class="fa-regular fa-floppy-disk"></i>
+                Save
+            `;
+
+        }
+
+    }
+
+});
 
                 // ==================================
                 // EVENT LISTENERS

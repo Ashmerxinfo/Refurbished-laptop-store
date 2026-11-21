@@ -1445,6 +1445,115 @@ app.get("/api/admin/stock", async (req, res) => {
 
 
 
+// =====================================
+// STOCK ADJUSTMENT
+// =====================================
+
+app.post("/api/admin/stock/adjust", async (req, res) => {
+
+    try {
+
+        if (!isAdminAuthenticated(req)) {
+            return res.status(401).json({
+                success: false,
+                message: "Unauthorized access"
+            });
+        }
+
+        const { productId, action, quantity } = req.body;
+
+        const adjustment = Number(quantity);
+
+        if (
+            !productId ||
+            !["add", "remove"].includes(action) ||
+            !Number.isSafeInteger(adjustment) ||
+            adjustment <= 0
+        ) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid stock adjustment details"
+            });
+        }
+
+        let updatedProduct;
+
+        if (action === "add") {
+
+            updatedProduct = await Product.findOneAndUpdate(
+                {
+                    productId,
+                    isActive: true
+                },
+                {
+                    $inc: { available: adjustment }
+                },
+                {
+                    new: true,
+                    runValidators: true
+                }
+            ).select("productId name available");
+
+        } else {
+
+            updatedProduct = await Product.findOneAndUpdate(
+                {
+                    productId,
+                    isActive: true,
+                    available: { $gte: adjustment }
+                },
+                {
+                    $inc: { available: -adjustment }
+                },
+                {
+                    new: true,
+                    runValidators: true
+                }
+            ).select("productId name available");
+
+        }
+
+        if (!updatedProduct) {
+
+            const productExists = await Product.exists({
+                productId,
+                isActive: true
+            });
+
+            if (!productExists) {
+                return res.status(404).json({
+                    success: false,
+                    message: "Product not found"
+                });
+            }
+
+            return res.status(400).json({
+                success: false,
+                message: "Insufficient stock. Cannot remove more than available quantity."
+            });
+
+        }
+
+        return res.json({
+            success: true,
+            message: "Stock updated successfully",
+            product: updatedProduct
+        });
+
+    } catch (error) {
+
+        console.error("Stock Adjustment Error:", error);
+
+        res.status(500).json({
+            success: false,
+            message: "Unable to update stock"
+        });
+
+    }
+
+});
+
+
 
 
 app.get("/api/admin/current-user", (req, res) => {

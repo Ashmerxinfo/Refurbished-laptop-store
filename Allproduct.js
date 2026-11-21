@@ -153,8 +153,8 @@ function selectCategory(category) {
         LAPTOP: "Laptops",
         DESKTOP: "Desktops",
         ACCESSORY: "Accessories",
-        STORAGE: "Storage",
-        RAM: "RAM"
+        PRINTER: "Printer",
+        CCTV: "CCTV"
 
     };
 
@@ -794,8 +794,8 @@ function loadURLFilters() {
         "LAPTOP",
         "DESKTOP",
         "ACCESSORY",
-        "STORAGE",
-        "RAM"
+        "PRINTER",
+        "CCTV"
     ];
 
 
@@ -825,8 +825,8 @@ function loadURLFilters() {
         LAPTOP: "Laptops",
         DESKTOP: "Desktops",
         ACCESSORY: "Accessories",
-        STORAGE: "Storage",
-        RAM: "RAM"
+        PRINTER: "Printer",
+        CCTV: "CCTV"
 
     };
 

@@ -20,7 +20,7 @@ const productSchema = new mongoose.Schema({
     category: {
         type: String,
         required: true,
-        enum: ["LAPTOP", "DESKTOP", "ACCESSORY", "STORAGE", "RAM"]
+        enum: ["LAPTOP", "DESKTOP", "ACCESSORY", "PRINTER", "CCTV"]
     },
 
     badge: {
