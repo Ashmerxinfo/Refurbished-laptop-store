@@ -1,163 +1,272 @@
+/* =========================================
+   SRI KRISH COMPUTERS
+   PREMIUM WELCOME SCREEN
+========================================= */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+html,
 body {
-    font-family: Arial, sans-serif;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #061326;
     overflow: hidden;
 }
+
+/* =========================================
+   MAIN BACKGROUND
+========================================= */
 
 .welcome-screen {
     width: 100%;
-    height: 100vh;
-    min-height: 500px;
-    background: linear-gradient(
-        135deg,
-        #071326,
-        #102b50,
-        #071326
-    );
+    min-height: 100vh;
+    min-height: 100svh;
 
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+
     position: relative;
     overflow: hidden;
-    color: white;
+
+    color: #ffffff;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 43%,
+            #153d68 0%,
+            transparent 48%
+        ),
+        linear-gradient(
+            135deg,
+            #07172d,
+            #061124 55%,
+            #0a1d36
+        );
 }
 
-.welcome-content {
-    text-align: center;
-    z-index: 2;
-    padding: 20px;
-    animation: welcomeAppear 1s ease forwards;
-}
+/* Background Grid */
 
-.logo-icon {
-    width: 85px;
-    height: 85px;
-    margin: 0 auto 25px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: 1px solid rgba(100, 180, 255, 0.5);
-    border-radius: 25px;
-
-    background: rgba(255,255,255,0.08);
-    box-shadow: 0 0 35px rgba(40,140,255,0.3);
-}
-
-.logo-icon i {
-    font-size: 42px;
-    color: #66c5ff;
-}
-
-.welcome-label {
-    color: #8fcfff;
-    letter-spacing: 6px;
-    font-size: 13px;
-    margin-bottom: 15px;
-}
-
-.welcome-content h1 {
-    font-size: clamp(30px, 6vw, 55px);
-    font-weight: 800;
-    letter-spacing: 2px;
-}
-
-.welcome-content h1 span {
-    color: #63c4ff;
-}
-
-.line {
-    width: 90px;
-    height: 3px;
-    background: #52bfff;
-    margin: 22px auto;
-    border-radius: 10px;
-    box-shadow: 0 0 15px #52bfff;
-}
-
-.welcome-content h2 {
-    font-size: clamp(16px, 3vw, 23px);
-    font-weight: 500;
-    color: #d5eaff;
-}
-
-.welcome-description {
-    margin-top: 15px;
-    color: #8ba9ca;
-    font-size: 13px;
-    letter-spacing: 3px;
-}
-
-.loading-area {
-    width: 220px;
-    margin: 55px auto 0;
-}
-
-.loading-bar {
-    height: 3px;
-    background: rgba(255,255,255,0.15);
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.loading-progress {
-    width: 0%;
-    height: 100%;
-    background: #60c5ff;
-    box-shadow: 0 0 12px #60c5ff;
-    animation: loadingProgress 3s linear forwards;
-}
-
-.loading-area p {
-    color: #8ba9ca;
-    font-size: 11px;
-    margin-top: 12px;
-    letter-spacing: 1px;
-}
-
-.welcome-footer {
+.background-grid {
     position: absolute;
-    bottom: 25px;
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: #6385a9;
+    inset: 0;
+
+    opacity: 0.10;
+
+    background-image:
+        linear-gradient(
+            #80b9ed 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            #80b9ed 1px,
+            transparent 1px
+        );
+
+    background-size: 55px 55px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent
+        );
 }
 
-.glow {
+/* =========================================
+   AMBIENT GLOW
+========================================= */
+
+.ambient {
     position: absolute;
+
+    border-radius: 50%;
+
+    filter: blur(100px);
+
+    pointer-events: none;
+
+    animation: ambientMove 8s ease-in-out infinite alternate;
+}
+
+.ambient-one {
     width: 350px;
     height: 350px;
-    border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.2;
+
+    background: #126de0;
+
+    top: 5%;
+    left: 10%;
+
+    opacity: 0.30;
 }
 
-.glow-one {
-    background: #087dff;
-    top: -150px;
-    left: -100px;
+.ambient-two {
+    width: 320px;
+    height: 320px;
+
+    background: #00a9e8;
+
+    bottom: 5%;
+    right: 10%;
+
+    opacity: 0.25;
+
+    animation-delay: 2s;
 }
 
-.glow-two {
-    background: #00c6ff;
-    bottom: -180px;
-    right: -100px;
+.ambient-three {
+    width: 220px;
+    height: 220px;
+
+    background: #2754bc;
+
+    top: 35%;
+    right: 35%;
+
+    opacity: 0.18;
+
+    animation-delay: 3s;
 }
 
-@keyframes loadingProgress {
+@keyframes ambientMove {
+
+    from {
+        transform: translate(0, 0) scale(0.9);
+    }
+
     to {
-        width: 100%;
+        transform: translate(35px, 20px) scale(1.2);
     }
 }
 
-@keyframes welcomeAppear {
+/* =========================================
+   STARS AND SPARKLES
+========================================= */
+
+.stars {
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+    z-index: 1;
+}
+
+.star {
+    position: absolute;
+
+    color: #bce6ff;
+
+    text-shadow:
+        0 0 8px #65baff,
+        0 0 20px #329aff;
+
+    animation: sparkle 3s ease-in-out infinite;
+}
+
+.star-1 {
+    top: 17%;
+    left: 16%;
+    font-size: 20px;
+}
+
+.star-2 {
+    top: 27%;
+    right: 17%;
+    font-size: 23px;
+    animation-delay: 0.5s;
+}
+
+.star-3 {
+    top: 52%;
+    left: 7%;
+    font-size: 16px;
+    animation-delay: 1s;
+}
+
+.star-4 {
+    top: 65%;
+    right: 10%;
+    font-size: 18px;
+    animation-delay: 1.5s;
+}
+
+.star-5 {
+    top: 12%;
+    right: 38%;
+    font-size: 13px;
+    animation-delay: 0.8s;
+}
+
+.star-6 {
+    top: 70%;
+    left: 27%;
+    font-size: 15px;
+    animation-delay: 2s;
+}
+
+.star-7 {
+    top: 35%;
+    left: 28%;
+    font-size: 35px;
+    animation-delay: 0.3s;
+}
+
+.star-8 {
+    top: 42%;
+    right: 28%;
+    font-size: 35px;
+    animation-delay: 1.2s;
+}
+
+.star-9 {
+    bottom: 18%;
+    right: 35%;
+    font-size: 14px;
+    animation-delay: 1.8s;
+}
+
+@keyframes sparkle {
+
+    0%, 100% {
+        opacity: 0.25;
+        transform: scale(0.7) rotate(0deg);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.3) rotate(45deg);
+    }
+}
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.welcome-container {
+    width: 100%;
+
+    position: relative;
+    z-index: 2;
+
+    text-align: center;
+
+    padding: 20px;
+
+    animation: contentReveal 1.2s ease both;
+}
+
+@keyframes contentReveal {
+
     from {
         opacity: 0;
         transform: translateY(25px);
@@ -169,26 +278,864 @@ body {
     }
 }
 
-@media (max-width: 480px) {
+/* =========================================
+   WELCOME LABEL
+========================================= */
 
-    .logo-icon {
-        width: 72px;
-        height: 72px;
+.welcome-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+
+    font-size: 13px;
+    font-weight: 900;
+
+    letter-spacing: 8px;
+
+    color: #d9ecff;
+
+    text-shadow: 0 0 18px #55aaff;
+
+    margin-bottom: 5px;
+}
+
+.label-line {
+    width: 30px;
+    height: 1px;
+
+    background: #65baff;
+
+    box-shadow: 0 0 10px #65baff;
+}
+
+/* =========================================
+   PRODUCT SHOWCASE
+========================================= */
+
+.product-stage {
+    width: min(600px, 96vw);
+    height: 260px;
+
+    margin: 0 auto;
+
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    perspective: 1000px;
+}
+
+.stage-glow {
+    position: absolute;
+
+    width: 380px;
+    height: 180px;
+
+    background: #1688ff;
+
+    filter: blur(100px);
+
+    opacity: 0.25;
+
+    border-radius: 50%;
+}
+
+/* Orbit */
+
+.orbit {
+    position: absolute;
+
+    border: 1px solid #65aaff25;
+
+    border-radius: 50%;
+
+    transform: rotateX(65deg);
+}
+
+.orbit-one {
+    width: 430px;
+    height: 160px;
+}
+
+.orbit-two {
+    width: 530px;
+    height: 205px;
+
+    border-style: dashed;
+
+    animation: orbitRotate 20s linear infinite;
+}
+
+@keyframes orbitRotate {
+    to {
+        transform: rotateX(65deg) rotate(360deg);
+    }
+}
+
+/* =========================================
+   LAPTOP
+========================================= */
+
+.laptop {
+    width: 300px;
+
+    position: absolute;
+
+    left: 50%;
+    top: 30px;
+
+    transform: translateX(-50%);
+
+    z-index: 3;
+
+    animation: laptopFloat 4s ease-in-out infinite;
+
+    filter: drop-shadow(0 25px 28px #0009);
+}
+
+.laptop-camera {
+    position: absolute;
+
+    top: 3px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background: #26394e;
+
+    z-index: 5;
+}
+
+/* Laptop Display */
+
+.laptop-screen {
+    width: 265px;
+    height: 170px;
+
+    margin: auto;
+
+    padding: 8px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f0f5fa,
+            #718ba7
+        );
+
+    border-radius: 10px 10px 5px 5px;
+
+    box-shadow:
+        inset 0 0 0 1px #ffffff90,
+        0 0 25px #4e9fff20;
+}
+
+/* =========================================
+   WINDOWS DESKTOP SCREEN
+========================================= */
+
+.windows-desktop {
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 4px;
+
+    background:
+        radial-gradient(
+            ellipse at 70% 35%,
+            #1689d9 0%,
+            transparent 45%
+        ),
+        linear-gradient(
+            135deg,
+            #071e4b,
+            #1263a5 55%,
+            #061a3c
+        );
+}
+
+/* Desktop Icons */
+
+.desktop-icons {
+    position: absolute;
+
+    top: 8px;
+    left: 7px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.desktop-icon {
+    width: 35px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 2px;
+
+    color: #ffffff;
+
+    text-shadow: 0 1px 3px #000;
+}
+
+.desktop-icon span {
+    font-size: 15px;
+}
+
+.desktop-icon small {
+    font-size: 5px;
+}
+
+/* Desktop Main Text */
+
+.desktop-center {
+    position: absolute;
+
+    top: 48%;
+    left: 50%;
+
+    width: 85%;
+
+    transform: translate(-50%, -50%);
+
+    text-align: center;
+}
+
+.windows-logo {
+    width: 27px;
+    height: 27px;
+
+    margin: 0 auto 8px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 3px;
+
+    transform: perspective(40px) rotateY(-8deg);
+}
+
+.windows-logo span {
+    background: #d8f2ff;
+
+    box-shadow: 0 0 7px #8ddaff;
+}
+
+.desktop-center h2 {
+    font-size: 10px;
+
+    color: #ffffff;
+
+    letter-spacing: 1px;
+
+    white-space: nowrap;
+}
+
+.desktop-divider {
+    width: 30px;
+    height: 2px;
+
+    margin: 6px auto;
+
+    background: #76c9ff;
+}
+
+.desktop-center p {
+    font-size: 5px;
+
+    color: #c7e8ff;
+
+    letter-spacing: 1px;
+}
+
+/* Windows Taskbar */
+
+.desktop-taskbar {
+    position: absolute;
+
+    height: 18px;
+
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    background: #07172be8;
+
+    backdrop-filter: blur(8px);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    color: #ffffff;
+}
+
+.start-button {
+    display: grid;
+
+    grid-template-columns: 5px 5px;
+
+    gap: 1px;
+}
+
+.start-button span {
+    width: 5px;
+    height: 5px;
+
+    background: #d8f0ff;
+}
+
+.task-search {
+    background: #ffffff30;
+
+    border-radius: 10px;
+
+    padding: 2px 12px;
+
+    font-size: 6px;
+}
+
+.task-search span {
+    margin-right: 3px;
+}
+
+.task-apps {
+    display: flex;
+    gap: 5px;
+
+    font-size: 8px;
+}
+
+.task-time {
+    font-size: 6px;
+}
+
+/* =========================================
+   LAPTOP BASE
+========================================= */
+
+.laptop-base {
+    width: 300px;
+    height: 12px;
+
+    margin: -1px auto 0;
+
+    position: relative;
+
+    background:
+        linear-gradient(
+            #e3ebf4,
+            #758ca5
+        );
+
+    clip-path:
+        polygon(
+            8% 0,
+            92% 0,
+            100% 100%,
+            0 100%
+        );
+
+    border-radius: 0 0 12px 12px;
+}
+
+.keyboard-area {
+    width: 125px;
+    height: 4px;
+
+    margin: auto;
+
+    background: #60758c;
+
+    opacity: 0.5;
+}
+
+.keyboard-keys {
+    width: 100%;
+    height: 2px;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #263b52 0px,
+            #263b52 4px,
+            transparent 4px,
+            transparent 6px
+        );
+}
+
+.trackpad {
+    width: 30px;
+    height: 2px;
+
+    margin: 1px auto;
+
+    background: #526b84;
+
+    opacity: 0.5;
+}
+
+/* =========================================
+   DESKTOP MONITOR
+========================================= */
+
+.desktop-monitor {
+    position: absolute;
+
+    width: 90px;
+
+    right: 3%;
+    bottom: 17px;
+
+    z-index: 4;
+
+    animation: monitorFloat 4s ease-in-out infinite;
+}
+
+.monitor-screen {
+    height: 65px;
+
+    padding: 5px;
+
+    border: 3px solid #b9cce0;
+
+    background: #18375a;
+
+    border-radius: 5px;
+
+    box-shadow: 0 0 25px #178fff35;
+}
+
+.monitor-wallpaper {
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 70% 30%,
+            #6cc7ff,
+            transparent 45%
+        ),
+        linear-gradient(
+            135deg,
+            #123f72,
+            #07172c
+        );
+}
+
+.monitor-light {
+    position: absolute;
+
+    width: 30px;
+    height: 30px;
+
+    top: 10px;
+    left: 20px;
+
+    background: #69caff;
+
+    filter: blur(20px);
+
+    opacity: 0.7;
+}
+
+.monitor-stand {
+    width: 13px;
+    height: 14px;
+
+    margin: auto;
+
+    background: #9ab2cb;
+}
+
+.monitor-foot {
+    width: 35px;
+    height: 4px;
+
+    margin: auto;
+
+    background: #c3d3e3;
+
+    border-radius: 5px;
+}
+
+/* =========================================
+   FLOATING BADGES
+========================================= */
+
+.floating-badge {
+    position: absolute;
+
+    z-index: 5;
+
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 10px 13px;
+
+    border: 1px solid #69b9ff55;
+
+    background: #102d4aeb;
+
+    border-radius: 30px;
+
+    box-shadow: 0 5px 25px #0005;
+
+    color: #c5e6ff;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    backdrop-filter: blur(10px);
+}
+
+.badge-left {
+    left: 3%;
+    top: 48px;
+}
+
+.badge-right {
+    right: 1%;
+    top: 65px;
+}
+
+.badge-icon {
+    color: #75caff;
+    font-size: 12px;
+}
+
+/* =========================================
+   BRAND CONTENT
+========================================= */
+
+.brand-content {
+    margin-top: 5px;
+
+    text-align: center;
+}
+
+.brand-content h1 {
+    font-size: clamp(23px, 4vw, 36px);
+
+    font-weight: 900;
+
+    letter-spacing: 3px;
+
+    color: #f4faff;
+
+    text-shadow:
+        0 0 15px #3a91db55,
+        0 4px 20px #0008;
+}
+
+.brand-underline {
+    width: 70px;
+    height: 3px;
+
+    margin: 15px auto;
+
+    border-radius: 5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #398cff,
+            #8bdcff
+        );
+
+    box-shadow: 0 0 15px #3eabff;
+}
+
+.brand-content h2 {
+    font-size: 23px;
+
+    color: #e4f3ff;
+
+    margin-bottom: 7px;
+}
+
+.brand-content h3 {
+    font-size: 16px;
+
+    color: #8dcaff;
+
+    font-weight: 500;
+}
+
+.brand-tagline {
+    margin-top: 14px;
+
+    color: #a3bad3;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.welcome-footer {
+    position: absolute;
+
+    bottom: 25px;
+
+    z-index: 5;
+
+    width: 100%;
+
+    text-align: center;
+}
+
+.loading-heading {
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: #829fbe;
+
+    margin-bottom: 10px;
+}
+
+.loading-bar {
+    width: 185px;
+    height: 3px;
+
+    background: #29425e;
+
+    margin: auto;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.loading-progress {
+    width: 0;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #398cff,
+            #76d8ff
+        );
+
+    box-shadow: 0 0 12px #55bfff;
+
+    animation: loadingProgress 4.5s linear forwards;
+}
+
+.loading-message {
+    color: #a3bad3;
+
+    font-size: 9px;
+
+    letter-spacing: 1.5px;
+
+    margin-top: 12px;
+}
+
+.powered-by {
+    font-size: 9px;
+
+    color: #718ba8;
+
+    letter-spacing: 3px;
+
+    margin-top: 24px;
+}
+
+.powered-by strong {
+    color: #b7f206;
+}
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes laptopFloat {
+
+    0%, 100% {
+        transform: translate(-50%, 0);
     }
 
-    .logo-icon i {
-        font-size: 35px;
+    50% {
+        transform: translate(-50%, -10px);
+    }
+}
+
+@keyframes monitorFloat {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+@keyframes loadingProgress {
+    to {
+        width: 100%;
+    }
+}
+
+/* =========================================
+   MOBILE RESPONSIVE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .welcome-container {
+        padding: 12px;
     }
 
     .welcome-label {
-        letter-spacing: 4px;
+        font-size: 11px;
+        letter-spacing: 6px;
     }
 
-    .welcome-content h1 {
-        letter-spacing: 1px;
+    .product-stage {
+        height: 220px;
     }
 
-    .welcome-description {
+    .laptop {
+        transform: translateX(-50%) scale(0.82);
+    }
+
+    .laptop-screen {
+        transform-origin: center;
+    }
+
+    .orbit-one {
+        width: 300px;
+    }
+
+    .orbit-two {
+        width: 360px;
+    }
+
+    .desktop-monitor {
+        transform: scale(0.8);
+        right: -1%;
+    }
+
+    .floating-badge {
+        padding: 8px 10px;
+        font-size: 7px;
+    }
+
+    .badge-left {
+        left: 0;
+        top: 35px;
+    }
+
+    .badge-right {
+        right: 0;
+        top: 48px;
+    }
+
+    .brand-content h1 {
+        font-size: 23px;
         letter-spacing: 2px;
+    }
+
+    .brand-content h2 {
+        font-size: 21px;
+    }
+
+    .brand-content h3 {
+        font-size: 14px;
+    }
+
+    .brand-tagline {
+        font-size: 9px;
+        letter-spacing: 2px;
+    }
+
+    .welcome-footer {
+        bottom: 18px;
+    }
+
+    .powered-by {
+        margin-top: 18px;
+    }
+
+    .star-1 {
+        left: 7%;
+    }
+
+    .star-2 {
+        right: 7%;
+    }
+}
+
+/* =========================================
+   SMALL HEIGHT SCREENS
+========================================= */
+
+@media (max-height: 700px) {
+
+    .welcome-container {
+        transform: scale(0.85);
+    }
+
+    .product-stage {
+        height: 205px;
+    }
+
+    .welcome-footer {
+        bottom: 10px;
+    }
+
+    .powered-by {
+        margin-top: 12px;
+    }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
     }
 }

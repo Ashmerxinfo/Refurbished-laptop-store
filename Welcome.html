@@ -3,76 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#061326">
 
-    <title>Welcome | AshmerX Infotech</title>
+    <title>Sri Krish Computers | Welcome</title>
 
-    <link rel="stylesheet" href="Welcome.css">
-
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="welcome.css">
 </head>
 
 <body>
 
-    <div class="welcome-screen">
+<div class="welcome-screen">
 
-        <div class="glow glow-one"></div>
-        <div class="glow glow-two"></div>
+    <!-- Background Effects -->
+    <div class="background-grid"></div>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <div class="ambient ambient-three"></div>
 
-        <div class="welcome-content">
-
-            <div class="logo-icon">
-                <i class="fa-solid fa-microchip"></i>
-            </div>
-
-            <p class="welcome-label">WELCOME TO</p>
-
-            <h1>ASHMERX <span>INFOTECH</span></h1>
-
-            <div class="line"></div>
-
-            <h2>Your Digital Transformation Partner</h2>
-
-            <p class="welcome-description">
-                Innovation. Technology. Trust.
-            </p>
-
-            <div class="loading-area">
-                <div class="loading-bar">
-                    <div class="loading-progress"></div>
-                </div>
-                <p>Preparing your experience...</p>
-            </div>
-
-        </div>
-
-        <div class="welcome-footer">
-            POWERED BY ASHMERX INFOTECH
-        </div>
-
+    <!-- Decorative Stars -->
+    <div class="stars">
+        <span class="star star-1">✦</span>
+        <span class="star star-2">✧</span>
+        <span class="star star-3">✦</span>
+        <span class="star star-4">✧</span>
+        <span class="star star-5">✦</span>
+        <span class="star star-6">✧</span>
+        <span class="star star-7">·</span>
+        <span class="star star-8">·</span>
+        <span class="star star-9">✦</span>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
+    <!-- Main Content -->
+    <main class="welcome-container">
 
-    // Welcome screen duration: 3 seconds
+        <div class="welcome-label">
+            <span class="label-line"></span>
+            WELCOME TO
+            <span class="label-line"></span>
+        </div>
 
-    setTimeout(function () {
+        <!-- Product Showcase -->
+        <section class="product-stage">
 
-        document.body.style.transition = "opacity 0.6s ease";
-        document.body.style.opacity = "0";
+            <div class="stage-glow"></div>
 
-        setTimeout(function () {
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
 
-            // Redirect to your main website
-            window.location.href = "index.html";
+            <!-- Laptop -->
+            <div class="laptop">
 
-        }, 600);
+                <div class="laptop-camera"></div>
 
-    }, 3000);
+                <div class="laptop-screen">
 
-});
-    </script>
+                    <div class="windows-desktop">
+
+                        <!-- Desktop Icons -->
+                        <div class="desktop-icons">
+
+                            <div class="desktop-icon">
+                                <span>🖥️</span>
+                                <small>This PC</small>
+                            </div>
+
+                            <div class="desktop-icon">
+                                <span>📁</span>
+                                <small>Files</small>
+                            </div>
+
+                            <div class="desktop-icon">
+                                <span>🌐</span>
+                                <small>Browser</small>
+                            </div>
+
+                            <div class="desktop-icon">
+                                <span>🗑️</span>
+                                <small>Recycle Bin</small>
+                            </div>
+
+                        </div>
+
+                        <!-- Desktop Center -->
+                        <div class="desktop-center">
+
+                            <div class="windows-logo">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+
+                            <h2>SREE KRISH COMPUTERS</h2>
+
+                            <div class="desktop-divider"></div>
+
+                            <p>PREMIUM TECHNOLOGY EXPERIENCE</p>
+
+                        </div>
+
+                        <!-- Windows Taskbar -->
+                        <div class="desktop-taskbar">
+
+                            <div class="start-button">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+
+                            <div class="task-search">
+                                <span>⌕</span>
+                                Search
+                            </div>
+
+                            <div class="task-apps">
+                                <span>🌐</span>
+                                <span>📁</span>
+                                <span>🛍️</span>
+                            </div>
+
+                            <div class="task-time">
+                                <span>09:41</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Laptop Base -->
+                <div class="laptop-base">
+
+                    <div class="keyboard-area">
+                        <div class="keyboard-keys"></div>
+                    </div>
+
+                    <div class="trackpad"></div>
+
+                </div>
+
+            </div>
+
+            <!-- Desktop Monitor -->
+            <div class="desktop-monitor">
+
+                <div class="monitor-screen">
+                    <div class="monitor-wallpaper">
+                        <div class="monitor-light"></div>
+                    </div>
+                </div>
+
+                <div class="monitor-stand"></div>
+                <div class="monitor-foot"></div>
+
+            </div>
+
+            <!-- Floating Labels -->
+            <div class="floating-badge badge-left">
+                <span class="badge-icon">✦</span>
+                <span>12+ YEARS</span>
+            </div>
+
+            <div class="floating-badge badge-right">
+                <span class="badge-icon">✓</span>
+                <span>QUALITY ASSURED</span>
+            </div>
+
+        </section>
+
+        <!-- Brand Information -->
+        <section class="brand-content">
+
+            <h1>SREE KRISH COMPUTERS</h1>
+
+            <div class="brand-underline"></div>
+
+            <h2>12 Years of Trust</h2>
+
+            <h3>One Reliable Partner</h3>
+
+            <p class="brand-tagline">
+                PREMIUM REFURBISHED TECHNOLOGY
+            </p>
+
+        </section>
+
+    </main>
+
+    <!-- Footer Loading -->
+    <footer class="welcome-footer">
+
+        <div class="loading-heading">
+            INITIALIZING YOUR EXPERIENCE
+        </div>
+
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+
+        <div class="loading-message">
+            Preparing your experience...
+        </div>
+
+        <div class="powered-by">
+            POWERED BY
+            <strong>ASHMERX INFOTECH</strong>
+        </div>
+
+    </footer>
+
+</div>
+
+<script>
+    // Welcome Screen Duration
+    const loadingDuration = 4500;
+
+    // Redirect to Customer Website
+    window.setTimeout(() => {
+        window.location.replace("/index.html");
+    }, loadingDuration);
+</script>
 
 </body>
 </html>
