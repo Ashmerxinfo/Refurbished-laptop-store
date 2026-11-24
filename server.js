@@ -665,7 +665,7 @@ const emailHTML = `
 `;
 
 const emailSent = await sendEmail(
-    "ashlinjoel05@gmail.com",
+    "sreekrishcomputersonline@gmail.com",
     `New Order Enquiry - ${savedOrder.orderId}`,
     emailHTML
 );
